@@ -1,11 +1,7 @@
 h1 {
-    color:rgb(60, 230, 131);
-    background-color: rgb(95, 87, 204);
+    color:rgb(39, 126, 197);
     font-size: 3.5em;
-    padding: 60px;
-    margin: 0px;
-    border-width: 0px;
-    text-align: center;
+    text-align: left;
 }
 h2 {
     color: rgb(60, 230, 131);
@@ -24,14 +20,8 @@ h3 {
     color: rgb(65, 189, 206);
     font-size: 1.5em;
 }
-a {
-    color:rgb(60, 224, 230);
-    text-decoration: none;
-    background-color: rgb(53, 47, 131);
-    padding: 5px;
-}
 body {
-    background-color: rgb(53, 47, 131);
+    background-color: rgb(56, 56, 56);
     font-size: 14;
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(153, 223, 73);
@@ -41,17 +31,23 @@ body {
 strong {
     text-transform: uppercase;
 }
-table {
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 3em;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
-td {
-    padding-left: 200px;
-    padding-right: 200px;
-    padding: 40px;
-    background-color: rgb(95, 87, 204);
-    border-color: rgb(153, 223, 73);
-    border-style: groove;
-    border-width: 5px;
+li {
+    float: left;
+    font-size: 40px;
+}
+li a {
+    display: block;
+    text-align: center;
+    color: cornflowerblue;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: rgb(25, 25, 25);
 }
