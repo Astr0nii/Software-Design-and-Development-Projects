@@ -17,6 +17,12 @@ footer {
     font-size: 20px;
     position: fixed;
     bottom: 0px;
+    transition: all 0.25s;
+}
+
+footer:hover {
+    animation: partyMode 1.5s infinite alternate ease-in-out;
+    font-size: 40px;
 }
 
 body {
@@ -24,14 +30,31 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1;
     text-align: center;
-    animation: textAnim 1s;
+    animation: textAnim 0.25s;
 }
 
 p {
     font-family: 'Times New Roman', Times, serif;
     color: rgb(190, 205, 209);
     font-size: 25px;
-    animation: textAnim 4s;
+    background-color: rgb(25, 25, 25);
+    border-width: 3px; 
+    border-style: solid;
+    border-color: rgb(45, 81, 112);
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.shortAnim {
+    animation: textAnim 0.5s 0.25s backwards;
+}
+
+.mediumAnim {
+    animation: textAnim 0.5s 0.5s backwards;
+}
+
+.longAnim {
+    animation: textAnim 0.5s 0.75s backwards;
 }
 
 strong {
@@ -42,6 +65,9 @@ ul {
     margin-top: 80px;
     font-size: 40px;
     list-style-type: none;
+}
+a {
+    color: rgb(190, 205, 209);
 }
 
 nav ul {
@@ -85,4 +111,13 @@ abbr {
 @keyframes textAnim {
     0% {opacity: 0;}
     100% {opacity: 100;}
+}
+
+@keyframes partyMode {
+    0% {color: red;}
+    20% {color: orange;}
+    40% {color: yellow;}
+    60% {color: lime;}
+    80% {color: cyan;}
+    100% {color: magenta;}
 }
