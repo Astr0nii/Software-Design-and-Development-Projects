@@ -12,6 +12,20 @@ h1 {
     padding: 20px;
 }
 
+h2 {
+    color:rgb(52, 200, 207);
+    font-size: 40px;
+    text-align: center;
+    background-color: rgb(25, 25, 25);
+    border-width: 3px; 
+    border-style: solid;
+    border-color: rgb(4, 109, 114);
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    margin-left: 650px;
+    margin-right: 650px;
+}
+
 footer {
     color: rgb(65, 189, 206);
     font-size: 20px;
@@ -57,10 +71,6 @@ p {
     animation: textAnim 0.5s 0.75s backwards;
 }
 
-strong {
-    text-transform: uppercase;
-}
-
 ul {
     margin-top: 80px;
     font-size: 40px;
@@ -68,6 +78,7 @@ ul {
 }
 a {
     color: rgb(190, 205, 209);
+    text-transform: uppercase;
 }
 
 nav ul {
@@ -106,6 +117,15 @@ li a:hover {
 abbr {
     text-decoration: none;
     color: rgb(255, 255, 255)
+}
+
+img {
+    background-color: rgb(25, 25, 25);
+    border-width: 3px; 
+    border-style: solid;
+    border-color: rgb(45, 81, 112);
+    border-radius: 30px;
+    padding: 20px 25px;
 }
 
 @keyframes textAnim {
