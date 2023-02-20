@@ -57,10 +57,6 @@ p {
     animation: textAnim 0.5s 0.75s backwards;
 }
 
-strong {
-    text-transform: uppercase;
-}
-
 ul {
     margin-top: 80px;
     font-size: 40px;
@@ -68,6 +64,7 @@ ul {
 }
 a {
     color: rgb(190, 205, 209);
+    text-transform: uppercase;
 }
 
 nav ul {
