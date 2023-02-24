@@ -1,100 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pattaya&family=Poppins:wght@200;400;600&family=Roboto&display=swap');
-
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 
 body {
-    background-color: rgb(231, 231, 255);
+    height: 125vh;
+    margin-top: 80px;
+    padding: 30px;
+    background-size: cover;
+    background-color: #0E0E13;
+    font-family: 'Urbanist', sans-serif;
 }
 
-a {
+h1 {
+    font-size: 4rem;
+    color: #cccccc;
+    font-weight: 400;
+    animation: fadeIn 0.65s linear 0.25s backwards;
+    align-items: center;
+}
+
+    h1 .newText {
+        font-family: 'Unbounded', sans-serif;
+        color: #d4d4d4
+    }
+    
+    h1 .smallText {
+        font-size: 0.25rem;
+        animation: fadeIn 0.65s linear 1.25s backwards;
+    }
+
+
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 25px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 20px;
+}
+
+header li a {
+    color: #b4b4b4;
     text-decoration: none;
-    color: rgb(45, 182, 175);
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    }
-    .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 20px;
-    }
+    transition: all 0.2s ease;
+}
 
-    .logo {
-        font-size: 32px;
-        color: rgb(5, 5, 116);
-        padding-left: 20px;
-    }
+header li:not(.logo) a {
+    animation: fadeIn 0.65s linear 1s backwards;
+}
 
-    .hamburger {
-        padding-right: 20px;
-        cursor: pointer;
-    }
+header li:not(.logo) a:hover {
+    color: #f0f8ff;
+}
 
-    .hamburger .line {
-        display: block;
-        width: 40px;
-        height: 5px;
-        margin-bottom: 10px;
-        background-color: black;
-    }
-
-    .navLink a {
-        display: block;
-        text-align: center;
-        padding: 10px 0px;
+.hoverEffect {
+    font-size: 2rem;
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+    .hoverEffect::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0px;
+        left: 0px;
+        background-color: #0087ca;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
     }
 
-    .navLink a:hover {
-        border-bottom: 3px solid rgb(36, 145, 196);
-        border-radius: 7px;
-        transition: all 0.2s ease;
+    .hoverEffect:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
     }
 
-    .hide {
-        display: none;
-    }
 
-    .content {
-        display: flex;
-        justify-content: center;
-        text-align: justify;
-        align-items: center;
-        margin-top: 20%;
-        color: rgb(17, 19, 19);
-        font-weight: 700;
-        font-size: 20px;
-    }
+.logo {
+    animation: fadeIn 1.2s linear 1.5s backwards;
+    font-size: 4.5rem;
+    color: #f0f8ff;
+    text-shadow:#0047ca 0 0 20px;
+}
 
-    @media screen and (min-width: 600px) {
-        .navLink {
-            display: block;
-            position: static;
-            width: auto;
-            margin-right: 20px;
-            background: none;
-        }
 
-        .navLink a {
-            display: inline-block;
-            padding: 15px 20px;
-        }
-
-        .hamburger {
-            display: none;
-        }
-
-        .content {
-            display: block;
-            text-align: center;
-            margin-left: 15px;
-        }
-    }
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 
 @keyframes partyMode {
     0% {color: red;}
