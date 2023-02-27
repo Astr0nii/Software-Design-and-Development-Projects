@@ -16,7 +16,7 @@ h1 {
     font-size: 4rem;
     color: #cccccc;
     font-weight: 400;
-    animation: fadeIn 0.65s linear 0.25s backwards;
+    animation: fadeIn 1s linear 0.25s backwards;
     align-items: center;
     padding: 60px;
 }
@@ -33,7 +33,7 @@ h1 {
 
 p {
     opacity: 0;
-    animation: fadeIn 3s forwards 1.5s ease-out;
+    animation: fadeIn 3s forwards 1.25s ease-out;
     display: flex;
     color: #afafaf;
     font-size: 1.2rem;
@@ -84,7 +84,6 @@ header li:not(.logo) a:hover {
 }
 
 .hoverEffect {
-    animation: fadeIn 0.65s linear 1s backwards;
     font-size: 2rem;
     display: inline-block;
     position: relative;
@@ -93,31 +92,45 @@ header li:not(.logo) a:hover {
     .hoverEffect::after {
         content: '';
         position: absolute;
-        width: 100%;
+        width: 120%;
         transform: scaleX(0);
         height: 2px;
         bottom: 0px;
-        left: 0px;
+        left: -10%;
         background-color: #0087ca;
-        transform-origin: bottom right;
+        transform-origin: center;
         transition: transform 0.25s ease-out;
     }
 
     .hoverEffect:hover::after {
         transform: scaleX(1);
-        transform-origin: bottom left;
+        transform-origin: center;
     }
 
 
 .logo {
-    opacity: 0;
-    animation: fadeIn 3s forwards 1s ease-out;
     font-size: 6rem;
     font-family: 'Nabla', sans-serif;
     color: #f0f8ff;
     text-decoration: none;
     padding: 40px;
     margin-top: 40px;
+}
+
+.colouredTextRed {
+    font-weight: bold;
+    color: #e23500;
+    text-shadow: 0 0 5px;
+}
+.colouredTextBlue {
+    font-weight: bold;
+    color: #00d3e2;
+    text-shadow: 0 0 5px;
+}
+.colouredTextYellow {
+    font-weight: bold;
+    color: #e2a600;
+    text-shadow: 0 0 5px;
 }
 
 @keyframes fadeIn {
