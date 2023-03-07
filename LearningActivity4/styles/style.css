@@ -111,7 +111,6 @@ header li:not(.logo) a:hover {
 .logo {
     font-size: 6rem;
     font-family: 'Nabla', sans-serif;
-    color: #f0f8ff;
     text-decoration: none;
     padding: 40px;
     margin-top: 40px;
