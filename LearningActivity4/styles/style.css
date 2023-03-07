@@ -37,10 +37,26 @@ p {
     display: flex;
     color: #afafaf;
     font-size: 1.2rem;
-    justify-content: right;
     padding: 20px;
 }
+    .textTitleSection {
+        width: 350px;
+        
+    }
+    
+    .textMainSection {
+        display: flexbox;
+        width: 400px;
+        background-color: #26262c;
+        background-size: cover;
+    }
 
+
+abbr {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #d4d4d4;
+}
 
 header {
     position: fixed;
@@ -111,7 +127,6 @@ header li:not(.logo) a:hover {
 .logo {
     font-size: 6rem;
     font-family: 'Nabla', sans-serif;
-    color: #f0f8ff;
     text-decoration: none;
     padding: 40px;
     margin-top: 40px;
@@ -121,17 +136,29 @@ header li:not(.logo) a:hover {
     font-weight: bold;
     color: #e23500;
     text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
 }
+    .colouredTextRed:hover {
+        text-shadow: 0 0 25px;
+    }
 .colouredTextBlue {
     font-weight: bold;
     color: #00d3e2;
     text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
 }
+    .colouredTextBlue:hover {
+        text-shadow: 0 0 25px;
+    }
 .colouredTextYellow {
     font-weight: bold;
     color: #e2a600;
     text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
 }
+    .colouredTextYellow:hover {
+        text-shadow: 0 0 25px;
+    }
 
 @keyframes fadeIn {
     from {opacity: 0;}
