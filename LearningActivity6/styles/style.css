@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+
+body {
+    height: 125vh;
+    margin-top: 80px;
+    padding: 30px;
+    background-size: cover;
+    background-color: #0E0E13;
+    font-family: 'Urbanist', sans-serif;
+}
+
+h1 {
+    display: inline-block;
+    font-size: 4rem;
+    color: #cccccc;
+    font-weight: 400;
+    animation: fadeIn 1s linear 0.25s backwards;
+    align-items: center;
+    padding: 60px;
+}
+
+    h1 .newText {
+        font-family: 'Unbounded', sans-serif;
+        color: #d4d4d4
+    }
+    
+    h1 .smallText {
+        font-family: 'Unbounded', sans-serif;
+        font-size: 1rem;
+    }
+
+p {
+    opacity: 0;
+    animation: fadeIn 3s forwards 1.25s ease-out;
+    display: flex;
+    color: #afafaf;
+    font-size: 1.2rem;
+    padding: 20px;
+}
+    .textTitleSection {
+        width: 350px;
+        margin-left: auto;
+    }
+    
+    .textMainSection {
+        background-color: #26262c;
+        background-size: cover;
+    }
+
+
+abbr {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #d4d4d4;
+}
+
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 25px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav {
+    display: flex;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 20px;
+}
+
+header li .logo {
+    justify-content: left;
+}
+
+header li a {
+    color: #c5c5c5;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+header li:not(.logo) a:hover {
+    color: #f0f8ff;
+}
+
+.active {
+    text-shadow: #00d3e2 0 0 10px;
+}
+
+.hoverEffect {
+    font-size: 2rem;
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+    .hoverEffect::after {
+        content: '';
+        position: absolute;
+        width: 120%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0px;
+        left: -10%;
+        background-color: #0087ca;
+        transform-origin: center;
+        transition: transform 0.25s ease-out;
+    }
+
+    .hoverEffect:hover::after {
+        transform: scaleX(1);
+        transform-origin: center;
+    }
+
+
+.logo {
+    font-size: 6rem;
+    font-family: 'Nabla', sans-serif;
+    text-decoration: none;
+    padding: 40px;
+    margin-top: 40px;
+}
+
+.colouredTextRed {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #e23500;
+    text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
+}
+    .colouredTextRed:hover {
+        text-shadow: 0 0 25px;
+    }
+.colouredTextBlue {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00d3e2;
+    text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
+}
+    .colouredTextBlue:hover {
+        text-shadow: 0 0 25px;
+    }
+.colouredTextYellow {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #e2a600;
+    text-shadow: 0 0 5px;
+    transition: all 0.5s ease-out;
+}
+    .colouredTextYellow:hover {
+        text-shadow: 0 0 25px;
+    }
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
