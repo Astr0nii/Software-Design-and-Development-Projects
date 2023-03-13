@@ -49,6 +49,31 @@ p {
         background-size: cover;
     }
 
+table {
+    animation: fadeIn 3s backwards 1.25s ease-out;
+    border-spacing: 50px;
+    width: 90%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    td {
+        border-width: 10px;
+        border-color: #26262c;
+        background-color: #26262c;
+        border-style: solid;
+        border-radius: 4px;
+        box-shadow: inset;
+    }
+        td .newText {
+            font-size: auto;
+            padding: 2px;
+            margin: 0;
+            justify-content: center;
+        }
+
+
 abbr {
     text-decoration: none;
     font-size: 1.2rem;
