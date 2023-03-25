@@ -1,12 +1,18 @@
 const api_url ="https://corsanywhere.herokuapp.com/https://zenquotes.io/api/today/";
 
+
 async function getapi(url)
 {
     const response = await fetch(url);
-    var data = await response.json();   
-    var quote = data[0].q;
-    var author = data[0].a;
-    var fullQuote = quote + " - " + author;
+    const data = await response.json();   
+
+    /* From our url fetch we are returned a JSONObject, from there we can,
+    *  grab the data inside of section '0', mainly q (the quote) and a (the author).
+    */
+    const quote = data[0].q;
+    const author = data[0].a;
+    const fullQuote = quote + " - " + author;
+
     document.getElementById("quote").innerHTML = fullQuote;
 }
 

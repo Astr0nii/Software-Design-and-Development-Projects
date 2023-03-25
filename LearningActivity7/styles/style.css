@@ -51,7 +51,7 @@ p {
     
     .textQuoteSection {
         margin-top: 2rem;
-        font-size: 4rem;
+        font-size: 2.5rem;
         font-weight: lighter;
         text-align: center;
     }
@@ -65,6 +65,7 @@ p {
 
 
 table {
+    position: relative;
     animation: fadeIn 1.5s backwards 1s ease-out;
     border-spacing: 3.125rem;
     width: 90%;
@@ -80,7 +81,8 @@ table {
         border-style: solid;
         border-radius: 0.25rem;
         box-shadow: inset;
-        transition: transform 0.1s;
+        transform-style: preserve-3d;
+        transform: perspective(62.5rem);
     }
         td .newText {
             font-size: auto;
@@ -200,7 +202,27 @@ header li:not(.logo) a:hover {
         color: #cc19c3
     }
 
+.cursor {
+    display: inline-block;
+    width: 0.25rem;
+    background-color: #cccccc;
+    margin-left: 0.1rem;
+    animation: blink 1s infinite;
+}
+    .cursor.typing {
+        animation: none;
+    }
+
+
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0% { background-color: #cccccc; }
+    49% { background-color: #cccccc; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100% { background-color: #cccccc; }
 }
