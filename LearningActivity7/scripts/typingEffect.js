@@ -1,3 +1,12 @@
+/**********************************************************************************
+* Typing Effect Script for the JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
 const randomWords = ['perfect', 'extravagant', 'amazing', 'spectacular', 'excellent', 'brilliant', 'inspirational',
                     'striking', 'eye-catching', 'breathtaking', 'glorious', 'flawless', 'complete', 'dazzling',
                     'clever', 'creative', 'marvellous', 'superb', 'outstanding', 'wonderful', 'innovative', 

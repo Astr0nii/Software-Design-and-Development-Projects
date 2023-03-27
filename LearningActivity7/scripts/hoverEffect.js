@@ -1,3 +1,12 @@
+/**********************************************************************************
+* 3D Hover effect for the JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
 const tiltEffectSettings = {
     maxTilt: 10, // The maximum tilt in degrees.
     perspective: 62.5, // The REM value of our card's 3D perspective. 

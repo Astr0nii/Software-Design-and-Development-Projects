@@ -1,3 +1,12 @@
+/**********************************************************************************
+* Random Colour Script for the JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
 const randomColour = ['#e23500', '#00d3e2', '#e2a600', '#00e24b', '#8f00e2', '#cc7f19', '#cc19c3'];
 
 const choosenColour = randomColour[Math.floor(Math.random() * randomColour.length)];

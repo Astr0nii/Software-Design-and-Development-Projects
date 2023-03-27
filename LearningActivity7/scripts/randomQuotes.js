@@ -1,3 +1,12 @@
+/**********************************************************************************
+* Random Quote Script for the JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
 const api_url ="https://corsanywhere.herokuapp.com/https://zenquotes.io/api/today/";
 
 

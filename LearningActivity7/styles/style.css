@@ -1,3 +1,12 @@
+/**********************************************************************************
+* Style Sheet for the entire JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
 @import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
@@ -63,6 +72,10 @@ p {
         text-align: center;
     }
 
+footer {
+    position: fixed;
+    bottom: 0;
+}
 
 table {
     position: relative;
