@@ -1,0 +1,10 @@
+
+function getColours() {
+    var newColour = '#';
+    if (randomColour.length < 6) {
+        for(i=0;i<5;i++) {
+            newColour += Math.floor((Math.random() * 7) + 3);
+        }
+    }
+    randomColour.push(newColour);
+}
