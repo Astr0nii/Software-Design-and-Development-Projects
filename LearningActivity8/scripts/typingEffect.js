@@ -58,7 +58,6 @@ function erase() {
         setTimeout(erase, typingSettings.erasingDelay);
     }
     else {
-        require('./randomColours.js');
         cursorSpan.classList.remove("typing");
         wordIndex = Math.floor(Math.random() * randomWords.length);
         setTimeout(type, typingSettings.newWordDelay);

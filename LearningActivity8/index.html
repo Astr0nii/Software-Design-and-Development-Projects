@@ -19,7 +19,7 @@
     <title>JH - Homepage</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="styles/style.css">
-
+    <script src="scripts/main.js"></script>
 </head>
 
 
@@ -75,8 +75,11 @@
         <span class="smallText">It's pretty <strong>cheesy,</strong> huh?</span><br>
         <span class="textQuoteSection" id="quote"></span>
     </p>
-
-    <script src="scripts/randomQuotes.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        getAPI();
+    });
+    </script>
 
     <footer>
         You found me! I wonder what will be here :thinking:
