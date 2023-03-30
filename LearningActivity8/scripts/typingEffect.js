@@ -6,15 +6,13 @@
 *
 *
 **********************************************************************************/
-
 const randomWords = ['perfect', 'extravagant', 'amazing', 'spectacular', 'excellent', 'brilliant', 'inspirational',
                     'striking', 'eye-catching', 'breathtaking', 'glorious', 'flawless', 'complete', 'dazzling',
                     'clever', 'creative', 'marvellous', 'superb', 'outstanding', 'wonderful', 'innovative', 
                     'powered by ego', 'precisely crafted', 'fresh', 'forward-thinking'];
-const randomColour = [];
 
 const typedWordSpan = document.querySelectorAll(".colouredText");
-const cursorSpan = document.querySelector(".cursor")
+const cursorSpan = document.querySelector(".cursor");
 var hasPlayedOnce = false;
 
 const typingSettings = {
@@ -24,12 +22,6 @@ const typingSettings = {
 } 
 let charIndex = 0; // character index of currently selected word
 let wordIndex = 0; // word index of currently selected word
-
-// This is horribly in-efficient, but I'm currently a subpar programmer... So this will have to do
-const choosenColour = randomColour[Math.floor(Math.random() * randomColour.length)];
-const colourWord = document.getElementById("choosenWord");
-colourWord.style.color = choosenColour;
-
 
 function startTypingEffect() {
     if (!hasPlayedOnce) {
@@ -66,10 +58,8 @@ function erase() {
         setTimeout(erase, typingSettings.erasingDelay);
     }
     else {
+        require('./randomColours.js');
         cursorSpan.classList.remove("typing");
-        const choosenColour = randomColour[Math.floor(Math.random() * randomColour.length)];
-        const colourWord = document.getElementById("choosenWord");
-        colourWord.style.color = choosenColour;
         wordIndex = Math.floor(Math.random() * randomWords.length);
         setTimeout(type, typingSettings.newWordDelay);
     }

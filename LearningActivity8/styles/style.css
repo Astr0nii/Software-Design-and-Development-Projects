@@ -140,7 +140,7 @@ nav {
 }
 
 header * {
-    display: inline-block;
+    display: inline;
 }
 
 header li {

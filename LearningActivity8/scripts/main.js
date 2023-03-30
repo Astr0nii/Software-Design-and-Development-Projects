@@ -9,7 +9,7 @@
 
 const tiltEffectSettings = {
     maxTilt: 10, // The maximum tilt in degrees.
-    perspective: 62.5, // The REM value of our card's 3D perspective. 
+    perspective: 62.5, // The REM value of our card's 3D perspective. Must match our value in style.css
     scale: 1.15, // Our card's scale on hover
     speed: 500, // How fast in MS should our transition be?
     easing: "cubic-bezier(0.03, 0.98, 0.52, 0.99)" // Easing property yoinked from tiltjs :)
