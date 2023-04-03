@@ -7,7 +7,7 @@
     * Games page for the JH website
     *
     * Author: Joseph Healy
-    * Last Updated: 30/03/2023
+    * Last Updated: 31/03/2023
     *
     * Colours: Black #0E0E13, Silver #cccccc & #afafaf, Timberwolf #d4d4d4.
     *
@@ -16,6 +16,8 @@
 
     <title>JH - Games</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="../scripts/main.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -57,7 +59,12 @@
         <span class="cursor typing">&nbsp;</span><br>
         will be here!
     </h1>
-    <script src="../scripts/typingEffect.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            type();
+            colourElements();
+        });
+    </script>
 
     <footer>
         You found me! I wonder what will be here :thinking:

@@ -7,7 +7,7 @@
     * Mineral Evolution Tycoon Project page for the JH website
     *
     * Author: Joseph Healy
-    * Last Updated: 30/03/2023
+    * Last Updated: 31/03/2023
     *
     * Colours: Black #0E0E13, Silver #cccccc & #afafaf, Timberwolf #d4d4d4, 
     * Blue (NCS) #0087ca, Harvest gold #e2a600.
@@ -18,7 +18,7 @@
 
     <title>Projects - Mineral Evolution Tycoon</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    
+    <script src="../../scripts/main.js" defer></script>
 </head>
 
 <body>
@@ -57,7 +57,11 @@
         but something is <span id="choosenColour" class="colouredText">evolving</span>
         right here!
     </h1>
-    <script src="../../scripts/randomValues.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            colourElements();
+        });
+    </script>
     
 </body>
 

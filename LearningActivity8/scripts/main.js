@@ -28,7 +28,7 @@ const numOfColours = 6;
 const randomWords = ['perfect', 'extravagant', 'amazing', 'spectacular', 'excellent', 'brilliant', 'inspirational',
                     'striking', 'eye-catching', 'breathtaking', 'glorious', 'flawless', 'complete', 'dazzling',
                     'clever', 'creative', 'marvellous', 'superb', 'outstanding', 'wonderful', 'innovative', 
-                    'powered by ego', 'precisely crafted', 'fresh', 'forward-thinking'];
+                    'elegant', 'precisely crafted', 'fresh', 'forward-thinking'];
 
 const typedWordSpan = document.querySelectorAll(".colouredText");
 const cursorSpan = document.querySelector(".cursor");
@@ -39,7 +39,8 @@ const typingSettings = {
     newWordDelay: 3000 // time before word is replaced
 } 
 let charIndex = 0; // character index of currently selected word
-let wordIndex = 0; // word index of currently selected word
+let wordIndex = Math.floor(Math.random() * randomWords.length); // word index of currently selected word
+let isPlaying = true;
 
 
 window.onload = function() {
@@ -93,12 +94,35 @@ window.onload = function() {
 };
 
 
-// Function to get a set number of random colour and add them to an array
+// Function to get a set number of random colours and add them to an array
 function colourElements() {
     var newColour = '#';
     if (randomColours.length < numOfColours) {
         for(i=0;i<6;i++) {
-            newColour += Math.floor((Math.random() * 7) + 3);
+            newHexValue = Math.floor(Math.random() * 15 + 1);
+            switch (newHexValue) {
+                case 10:
+                    newHexValue = 'A'
+                    break;
+                case 11:
+                    newHexValue = 'B'
+                    break;
+                case 12:
+                    newHexValue = 'C'
+                    break;
+                case 13:
+                    newHexValue = 'D'
+                    break;
+                case 14:
+                    newHexValue = 'E'
+                    break;
+                case 15:
+                    newHexValue = 'F'
+                    break;
+                default:
+                    break;
+            }
+            newColour += newHexValue;
         }
         randomColours.push(newColour);
         colourElements();
@@ -112,6 +136,7 @@ function colourElements() {
 // Typing Function for typing effect
 function type() {
     if (charIndex < randomWords[wordIndex].length) {
+        isPlaying = true;
         if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
         typedWordSpan.forEach(function(span) {
             span.textContent += randomWords[wordIndex].charAt(charIndex);
@@ -121,6 +146,8 @@ function type() {
         setTimeout(type, typingSettings.typingDelay);
     }
     else {
+        isPlaying = false;
+        console.log(isPlaying);
         cursorSpan.classList.remove("typing");
         cursorSpan.classList.add("notTyping");
     }
@@ -140,9 +167,11 @@ function erase() {
         setTimeout(erase, typingSettings.erasingDelay);
     }
     else {
-        require('./randomColours.js');
-        cursorSpan.classList.remove("typing");
+        for (i=0;i<colouredElement.length;i++) {
+            colouredElement[i].style.color = randomColours[Math.floor(Math.random() * randomColours.length)];
+        }
         wordIndex = Math.floor(Math.random() * randomWords.length);
+        cursorSpan.classList.remove("typing");
         setTimeout(type, typingSettings.newWordDelay);
     }
 }
@@ -167,6 +196,8 @@ async function getAPI()
 // Add an event listener to play the typing effect when the user hovers over.
 typedWordSpan.forEach(function(span) {
     span.addEventListener("mouseover", event => {
-        erase();
+        if (!isPlaying) {
+            erase();
+        }
     });
 });
