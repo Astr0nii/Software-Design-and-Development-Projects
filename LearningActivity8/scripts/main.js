@@ -28,7 +28,8 @@ const numOfColours = 6;
 const randomWords = ['perfect', 'extravagant', 'amazing', 'spectacular', 'excellent', 'brilliant', 'inspirational',
                     'striking', 'eye-catching', 'breathtaking', 'glorious', 'flawless', 'complete', 'dazzling',
                     'clever', 'creative', 'marvellous', 'superb', 'outstanding', 'wonderful', 'innovative', 
-                    'elegant', 'precisely crafted', 'fresh', 'forward-thinking'];
+                    'elegant', 'precisely crafted', 'fresh', 'forward-thinking', 'remarkable', 'sublime', 'polished',
+                    'stunning', 'impressive', 'gorgeous', 'refined'];
 
 const typedWordSpan = document.querySelectorAll(".colouredText");
 const cursorSpan = document.querySelector(".cursor");

@@ -74,6 +74,7 @@ p {
 footer {
     position: fixed;
     bottom: 0;
+    font-size: 0.5rem;
 }
 
 table {
@@ -115,6 +116,7 @@ abbr {
 }
 
 hr {
+    z-index: 1;
     margin: 0;
     padding: 0;
     position: fixed;
@@ -128,6 +130,7 @@ hr {
 }
 
 header {
+    z-index: 1;
     position: fixed;
     left: 0;
     right: 0;
@@ -229,9 +232,6 @@ header li:not(.logo) a:hover {
 
     #yC {
         color: #e2a600;
-    }
-    #something {
-        color: #cc19c3
     }
 
 .cursor {
