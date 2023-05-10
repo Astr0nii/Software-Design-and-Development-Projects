@@ -9,6 +9,7 @@ const introPhrases = ["How do you do", "G'day", "Welcome", "Nice to meet you", "
 
 let request = indexedDB.open('usernameStorage', 1);
 let username;
+let i = -1;
 
 request.onupgradeneeded = function() {
     const db = request.result;
@@ -32,9 +33,15 @@ document.addEventListener("DOMContentLoaded", function() {
     else if (document.title == "Welcome to Astron") {
         document.getElementById("nameButton").addEventListener("click", function() {
             event.preventDefault();
-            storeUser(document.getElementById("name").value);
+            storeUser(" " + document.getElementById("name").value);
             document.location.href = "../index.html";
         });
+        document.getElementById("noNameButton").addEventListener("click", function() {
+            event.preventDefault();
+            storeUser("");
+            document.location.href = "../index.html";
+        });
+        fadeText(["welcomeText", "welcomeText2", "welcomeText3", "welcomeText4", "welcomeText5"])
     }
 });
 
@@ -64,4 +71,46 @@ function getUser(callback) {
                     } 
             }
         }
+}
+
+function fadeText(elements) {
+    
+    function nextElement() {
+        console.log(i);
+        let randElement = document.getElementById(elements[i]);
+        let opacity = 0;
+
+        randElement.style.opacity = opacity;
+        console.log("Fading element:", randElement);
+        const inInterval = setInterval(() => {
+            if (opacity >= 1) {
+                console.log("done");
+                clearInterval(inInterval);
+            }
+            else {
+                console.log("fade in");
+                opacity += 0.025;
+                randElement.style.opacity = opacity;
+            }
+        }, 50);
+    
+        setTimeout(() => {
+            const outInterval = setInterval(() => {
+                if (opacity <= 0) {
+                    console.log("done");
+                    clearInterval(outInterval);
+                }
+                else {
+                    console.log("fade out");
+                    opacity -= 0.025;
+                    randElement.style.opacity = opacity;
+                }
+            }, 50);
+            fadeText(elements);
+        }, 4000);
+    }
+    setTimeout(() => {
+        i++;
+        nextElement();
+    }, 2500);
 }

@@ -1,0 +1,10 @@
+#nameSection {
+    opacity: 0;
+}
+
+#welcomeSection {
+    position: absolute;
+    display: flex;
+    left: calc(50%);
+    top: calc(35% - 25px);
+}
