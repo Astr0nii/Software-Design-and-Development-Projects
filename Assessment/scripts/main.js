@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Function for storing a username
 function storeUser(username) {
     const db = request.result;
     const transaction = db.transaction('users', 'readwrite');
@@ -53,7 +54,7 @@ function storeUser(username) {
 
 }
 
-// Function for username storing
+// Function for grabbing a username
 function getUser(callback) {
         request.onsuccess = function() {
             const db = request.result;
@@ -73,6 +74,8 @@ function getUser(callback) {
         }
 }
 
+
+// Function for fading an array of elements
 function fadeText(elements) {
     
     function nextElement() {
@@ -80,7 +83,6 @@ function fadeText(elements) {
         let randElement = document.getElementById(elements[i]);
         let opacity = 0;
 
-        randElement.style.opacity = opacity;
         console.log("Fading element:", randElement);
         const inInterval = setInterval(() => {
             if (opacity >= 1) {

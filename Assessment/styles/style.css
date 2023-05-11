@@ -3,6 +3,7 @@
 }
 
 #welcomeSection {
+    opacity: 0.1;
     position: absolute;
     display: flex;
     left: calc(50%);
