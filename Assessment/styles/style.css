@@ -1,11 +1,29 @@
-#nameSection {
-    opacity: 0;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+
+#astronIcon {
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 4rem;
+    font-family: 'Josefin Sans', sans-serif;
+    text-decoration: none;
 }
 
-#welcomeSection {
-    opacity: 0.1;
+#introText {
     position: absolute;
-    display: flex;
-    left: calc(50%);
-    top: calc(35% - 25px);
+    left: calc(15%);
+    top: calc(20%);
+    font-family: 'Josefin Sans', sans-serif;
+    color: #5F5F7F;
+    font-size: 2rem;
+}
+
+#choosenWord {
+    position: absolute;
+    top: calc(30%);
+    left: calc(15%);
+    font-size: 10rem;
+    font-family: 'Josefin Sans', sans-serif;
 }

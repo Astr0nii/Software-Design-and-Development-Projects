@@ -7,112 +7,62 @@ const randomWords = ['perfect', 'extravagant', 'amazing', 'spectacular', 'excell
 const introPhrases = ["How do you do", "G'day", "Welcome", "Nice to meet you", "Looking great today", "Hi",
                      "Hi there", "Today is the day", "Feed your curiosity", "New dawn, new day"];
 
-let request = indexedDB.open('usernameStorage', 1);
-let username;
-let i = -1;
 
-request.onupgradeneeded = function() {
-    const db = request.result;
-    if (!db.objectStoreNames.contains('users')) {
-        db.createObjectStore("users", { keyPath: 'id' });
-    }
-}
-
-request.onsuccess = function() {
-    db = request.result;
-};
+// Random colour variables
+const randomColours = [];
+const numOfColours = 10;
+const colouredElement = document.getElementsByClassName("colouredText");
 
 document.addEventListener("DOMContentLoaded", function() {
     if (document.title == "Astron") {
-        getUser(function(username){
-            document.getElementById("replaceName").innerHTML = username;
-        });
+        colourElements();
         document.getElementById("choosenWord").innerHTML = randomWords[Math.floor(Math.random() * randomWords.length)];
         document.getElementById("introduction").innerHTML = introPhrases[Math.floor(Math.random() * introPhrases.length)];
-    }
-    else if (document.title == "Welcome to Astron") {
-        document.getElementById("nameButton").addEventListener("click", function() {
-            event.preventDefault();
-            storeUser(" " + document.getElementById("name").value);
-            document.location.href = "../index.html";
-        });
-        document.getElementById("noNameButton").addEventListener("click", function() {
-            event.preventDefault();
-            storeUser("");
-            document.location.href = "../index.html";
-        });
-        fadeText(["welcomeText", "welcomeText2", "welcomeText3", "welcomeText4", "welcomeText5"])
+
+        // Add an event listener to change the colour of our random word when hovered over
+        for(i=0;i<colouredElement.length;i++) {
+            colouredElement[i].addEventListener("mouseover", function() { 
+                colourElements();
+            });
+        }
     }
 });
 
-// Function for storing a username
-function storeUser(username) {
-    const db = request.result;
-    const transaction = db.transaction('users', 'readwrite');
-    const usersObjectStore = transaction.objectStore('users');
-    usersObjectStore.put({ id: 1, username });
-
-}
-
-// Function for grabbing a username
-function getUser(callback) {
-        request.onsuccess = function() {
-            const db = request.result;
-            const transaction = db.transaction('users', 'readonly');
-            const usersObjectStore = transaction.objectStore('users');
-            const getRequest = usersObjectStore.get(1);
-
-            getRequest.onsuccess = function() {
-                if (getRequest.result) {
-                    username = getRequest.result.username;
-                    callback(username);
-                }
-                else if (!getRequest.result && document.title != "Welcome to Astron") {
-                        document.location.href = "pages/welcome.html";
-                    } 
-            }
+// Random Colour Function grabbed from my previous website
+function colourElements() {
+    var newColour = '#';
+    for(i=0;i<6;i++) {
+        newHexValue = Math.floor(Math.random() * 15 + 1);
+        switch (newHexValue) {
+            case 10:
+                newHexValue = 'A'
+                break;
+            case 11:
+                newHexValue = 'B'
+                break;
+            case 12:
+                newHexValue = 'C'
+                break;
+            case 13:
+                newHexValue = 'D'
+                break;
+            case 14:
+                newHexValue = 'E'
+                break;
+            case 15:
+                newHexValue = 'F'
+                break;
+            default:
+                break;
         }
-}
-
-
-// Function for fading an array of elements
-function fadeText(elements) {
-    
-    function nextElement() {
-        console.log(i);
-        let randElement = document.getElementById(elements[i]);
-        let opacity = 0;
-
-        console.log("Fading element:", randElement);
-        const inInterval = setInterval(() => {
-            if (opacity >= 1) {
-                console.log("done");
-                clearInterval(inInterval);
-            }
-            else {
-                console.log("fade in");
-                opacity += 0.025;
-                randElement.style.opacity = opacity;
-            }
-        }, 50);
-    
-        setTimeout(() => {
-            const outInterval = setInterval(() => {
-                if (opacity <= 0) {
-                    console.log("done");
-                    clearInterval(outInterval);
-                }
-                else {
-                    console.log("fade out");
-                    opacity -= 0.025;
-                    randElement.style.opacity = opacity;
-                }
-            }, 50);
-            fadeText(elements);
-        }, 4000);
+        newColour += newHexValue;
     }
-    setTimeout(() => {
-        i++;
-        nextElement();
-    }, 2500);
+    randomColours.push(newColour);
+
+    for (i=0;i<colouredElement.length;i++) {
+        colouredElement[i].style.color = randomColours[Math.floor(Math.random() * randomColours.length)];
+    }
 }
+
+
+
