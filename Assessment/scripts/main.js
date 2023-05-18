@@ -11,20 +11,23 @@ const introPhrases = ["How do you do", "G'day", "Welcome", "Nice to meet you", "
 // Random colour variables
 const randomColours = [];
 const numOfColours = 10;
-const colouredElement = document.getElementsByClassName("colouredText");
+const randWordElement = document.getElementsByClassName("choosenWord")
+let colouredElement = document.getElementById("colouredText");
 
 document.addEventListener("DOMContentLoaded", function() {
     if (document.title == "Astron") {
         colourElements();
-        document.getElementById("choosenWord").innerHTML = randomWords[Math.floor(Math.random() * randomWords.length)];
+        console.log(randWordElement.length);
+        for (i=0;i<randWordElement.length;i++) {
+            randWordElement[i].innerHTML = randomWords[Math.floor(Math.random() * randomColours.length)]
+        }
+        
         document.getElementById("introduction").innerHTML = introPhrases[Math.floor(Math.random() * introPhrases.length)];
 
         // Add an event listener to change the colour of our random word when hovered over
-        for(i=0;i<colouredElement.length;i++) {
-            colouredElement[i].addEventListener("mouseover", function() { 
-                colourElements();
-            });
-        }
+        colouredElement.addEventListener("mouseover", function() { 
+            colourElements();
+        });
     }
 });
 
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function colourElements() {
     var newColour = '#';
     for(i=0;i<6;i++) {
-        newHexValue = Math.floor(Math.random() * 15 + 1);
+        newHexValue = Math.floor(Math.random() * 13 + 1);
         switch (newHexValue) {
             case 10:
                 newHexValue = 'A'
@@ -46,23 +49,16 @@ function colourElements() {
             case 13:
                 newHexValue = 'D'
                 break;
-            case 14:
-                newHexValue = 'E'
-                break;
-            case 15:
-                newHexValue = 'F'
-                break;
             default:
                 break;
         }
         newColour += newHexValue;
     }
-    randomColours.push(newColour);
+    console.log("Colour:", newColour);
 
-    for (i=0;i<colouredElement.length;i++) {
-        colouredElement[i].style.color = randomColours[Math.floor(Math.random() * randomColours.length)];
-    }
+    colouredElement = document.getElementById("colouredText");
+
+    colouredElement.style.transition = `1s ease-out`;
+    colouredElement.style.color = newColour;
+    
 }
-
-
-
