@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+    <head>
+        <!--
+        /**********************************************************************************
+        * Home page for the Clicker game
+        *
+        * Author: Joseph Healy
+        * Last Updated: 05/23/2023
+        *
+        * Colours: White #FFFFFF
+        *
+        **********************************************************************************/
+        -->
+
+
+        <title>A Clicker Game</title>
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/main.js"></script>
+    </head>
+
+    <body>
+
+        <section>
+            <h1>
+                <table>
+                    <tr>
+                        Current exchange rate for bread is: <span id="sellRate"></span>
+                    </tr>
+                    <tr>
+                        <td>
+                            Bread
+                        </td>
+                        <td>
+                            Money
+                        </td>
+                    </tr>
+                    <tr id="currencyNumbers">
+                        <td id="bread">0</td>
+                        <td id="money">0</td>
+                    </tr>
+                </table>
+            </h1>
+        </section>
+
+        <section>
+            <span id="breadAdded"></span>
+            <span id="moneyAdded"></span>
+        </section>
+
+        <section id="buttons">
+                <button id="breadMaker">Press to make bread!</button>
+                <button id="moneyMaker">Press to sell bread!</button>
+        </section>
+
+    </body>
+</html>
