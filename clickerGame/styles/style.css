@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#buttons {
+    display: inline-block;
+    position: absolute;
+    left: calc(42.5%);
+    bottom: calc(15%);
+}
+    #moneyMaker {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    #breadMaker {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+#money {
+    color: darkgreen;
+}
