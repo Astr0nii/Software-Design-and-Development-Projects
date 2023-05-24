@@ -9,7 +9,7 @@ let breadAmountAdded = 1;
 let breadSellAmount = 1;
 
 // Money vars
-let money = 1000;
+let money = 9999;
 let moneyAmountAdded = 1;
 let moneyMulti = 1;
 let moneyMultiUp = 1;
@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let upgrades = data.upgrades;
 
     function createButton(upgrade, container) {
-        let button = document.createElement('button');
+        let button = document.createElement('button')
+        button.setAttribute("data-unique-id", upgrade.id);
         button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
         button.classList.add('button-container');
     
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
             let added = false;
             for (let child of buttonContain.children) {
-                if (child.textContent.includes(upgrade.name)) {
+                if (child.dataset.uniqueId == upgrade.id) {
                     added = true;
                     break;
                 }
@@ -266,6 +267,7 @@ let data = {
     "upgrades": [
         {
             "name": "Larger Stan Mixer",
+            "id": "largerstan",
             "description": "Increases the amount of dough you get.",
             "type": "nonPerm",
             "prereq": {
@@ -278,6 +280,7 @@ let data = {
         },
         {
             "name": "Larger Loaf Tin",
+            "id": "largerloaf",
             "description": "Increases the amount of bread you get, at the cost of more dough",
             "type": "nonPerm",
             "prereq": {
@@ -290,6 +293,7 @@ let data = {
         },
         {
             "name": "Better Sales Skills",
+            "id": "bettersales",
             "description": "Increases the amount of bread you can sell at one time",
             "type": "nonPerm",
             "prereq": {
@@ -302,6 +306,7 @@ let data = {
         },
         {
             "name": "Hire a Mixer",
+            "id": "mixerhire",
             "description": "Automatically mixes dough for you at a reduced rate",
             "type": "worker",
             "prereq": {
@@ -314,6 +319,7 @@ let data = {
         },
         {
             "name": "Hire a Baker",
+            "id": "bakerhire",
             "description": "Automatically bakes bread for you at a reduced rate",
             "type": "worker",
             "prereq": {
@@ -326,6 +332,7 @@ let data = {
         },
         {
             "name": "Hire a Salesman",
+            "id": "salesmanhire",
             "description": "Automatically sells bread for you at a reduced rate, doesn't change the market sell rate of bread",
             "type": "worker",
             "prereq": {
@@ -338,6 +345,7 @@ let data = {
         },
         {
             "name": "Sales Tactics",
+            "id": "salestact2",
             "description": "Increase overall money multipler by x1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
@@ -350,6 +358,7 @@ let data = {
         },
         {
             "name": "Market Manipulation",
+            "id": "salestact2",
             "description": "Increase overall money multipler by x1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
@@ -359,6 +368,19 @@ let data = {
             "level": 0,
             "cost": 1250,
             "effect": function() { moneyMultiUp+=1;money-=this.cost; }
-        }
+        },
+        {
+            "name": "Worker Efficiency",
+            "id": "workereff",
+            "description": "Increases the effectiveness of workers",
+            "type": "nonPerm",
+            "prereq": {
+                "purchase": "none",
+                "level": "none"
+            },
+            "level": 0,
+            "cost": 500,
+            "effect": function() { workerEFF+=(5*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
+        },
     ]
 }
