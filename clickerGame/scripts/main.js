@@ -80,10 +80,19 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let upgrade of upgrades) {
             let unlocked = true;
     
-            if (upgrade.prereq.purchase !== "none") {
-                let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase.toLowerCase());
-                if (prereqUpgrade.level < upgrade.prereq.level) {
-                    unlocked = false;
+            if (upgrade.prereq.numOfPurchase == 0) {
+                console.log(upgrade);
+                console.log("No number of upgrades!");
+                
+            }
+            else {
+                for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
+                    console.log("checking: ", upgrade);
+                    console.log(i);
+                    let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase[i].toLowerCase());
+                    if (prereqUpgrade.level < upgrade.prereq.level) {
+                        unlocked = false;
+                    }
                 }
             }
     
@@ -145,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         updateVals();
         }
         else {
+            console.log("BROKE MF (in the dough department")
             breadAdded.style.opacity = 0;
             doughAdded.style.opacity = 0;
         }
@@ -271,7 +281,10 @@ let data = {
             "description": "Increases the amount of dough you get.",
             "type": "nonPerm",
             "prereq": {
-                "purchase": "none",
+                "numOfPurchase": 0,
+                "purchase": {
+                    0:  "none"
+                },
                 "level": "none"
             },
             "level": 0,
@@ -284,7 +297,10 @@ let data = {
             "description": "Increases the amount of bread you get, at the cost of more dough",
             "type": "nonPerm",
             "prereq": {
-                "purchase": "none",
+                "numOfPurchase": 0,
+                "purchase": {
+                    0:  "none"
+                },
                 "level": "none"
             },
             "level": 0,
@@ -297,7 +313,10 @@ let data = {
             "description": "Increases the amount of bread you can sell at one time",
             "type": "nonPerm",
             "prereq": {
-                "purchase": "none",
+                "numOfPurchase": 0,
+                "purchase": {
+                    0:  "none"
+                },
                 "level": "none"
             },
             "level": 0,
@@ -310,7 +329,10 @@ let data = {
             "description": "Automatically mixes dough for you at a reduced rate",
             "type": "worker",
             "prereq": {
-                "purchase": "Larger Stan Mixer",
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Larger Stan Mixer"
+                },
                 "level": "1"
             },
             "level": 0,
@@ -323,7 +345,10 @@ let data = {
             "description": "Automatically bakes bread for you at a reduced rate",
             "type": "worker",
             "prereq": {
-                "purchase": "Larger Loaf Tin",
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Larger Loaf Tin"
+                },
                 "level": "1"
             },
             "level": 0,
@@ -331,12 +356,15 @@ let data = {
             "effect": function() { breadWorkers+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
-            "name": "Hire a Salesman",
-            "id": "salesmanhire",
+            "name": "Hire a Salesperson",
+            "id": "salespersonhire",
             "description": "Automatically sells bread for you at a reduced rate, doesn't change the market sell rate of bread",
             "type": "worker",
             "prereq": {
-                "purchase": "Better Sales Skills",
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Better Sales Skills"
+                },
                 "level": "1"
             },
             "level": 0,
@@ -349,7 +377,10 @@ let data = {
             "description": "Increase overall money multipler by x1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
-                "purchase": "none",
+                "numOfPurchase": 0,
+                "purchase": {
+                    0:  "none"
+                },
                 "level": "none"
             },
             "level": 0,
@@ -362,7 +393,10 @@ let data = {
             "description": "Increase overall money multipler by x1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
-                "purchase": "Sales Tactics",
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Sales Tactics"
+                },
                 "level": "1"
             },
             "level": 0,
@@ -375,12 +409,17 @@ let data = {
             "description": "Increases the effectiveness of workers",
             "type": "nonPerm",
             "prereq": {
-                "purchase": "none",
-                "level": "none"
+                "numOfPurchase": 3,
+                "purchase": {
+                    0:  "Hire a Mixer",
+                    1: "Hire a Baker",
+                    2: "Hire a Salesperson"
+                },
+                "level": "1"
             },
             "level": 0,
             "cost": 500,
             "effect": function() { workerEFF+=(5*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
-        },
+        }
     ]
 }
