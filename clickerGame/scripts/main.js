@@ -9,7 +9,7 @@ let breadAmountAdded = 1;
 let breadSellAmount = 1;
 
 // Money vars
-let money = 9999;
+let money = 0;
 let moneyAmountAdded = 1;
 let moneyMulti = 1;
 let moneyMultiUp = 1;
@@ -73,8 +73,9 @@ document.addEventListener("DOMContentLoaded", function() {
             button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
         });
     
-        button.style.padding = '2rem';
-        button.style.width = '20rem'
+        button.style.padding = '1.25rem';
+        button.style.fontSize = '1rem';
+        button.style.width = '20rem';
         button.style.textAlign = 'center';
         container.appendChild(button);
     }
@@ -254,7 +255,7 @@ function updateWorkers() {
         breadAdded.style.opacity = 1;
         moneyAdded.style.opacity = 1;
         if (bread - breadSellAmount >= 0) {
-            const moneyToBe = Math.ceil(moneyWorkers*(moneyAmountAdded*workerEFF));
+            const moneyToBe = Math.ceil(moneyWorkers*(moneyAmountAdded));
             money += moneyToBe;
             bread -= Math.ceil(moneyWorkers*(breadSellAmount*workerEFF));
             setTimeout(function() {
@@ -291,7 +292,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 50,
+            "cost": 25,
             "effect": function() { doughAmountAdded+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -307,7 +308,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 75,
+            "cost": 40,
             "effect": function() { breadAmountAdded+=(1*this.level);doughCost+=(2*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -323,7 +324,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 100,
+            "cost": 65,
             "effect": function() { breadSellAmount+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -361,7 +362,7 @@ let data = {
         {
             "name": "Hire a Salesperson",
             "id": "salespersonhire",
-            "description": "Automatically sells bread for you at a reduced rate, doesn't change the market sell rate of bread",
+            "description": "Automatically sells bread for you, doesn't change the market sell rate of bread",
             "type": "worker",
             "prereq": {
                 "numOfPurchase": 1,
@@ -377,7 +378,7 @@ let data = {
         {
             "name": "Sales Tactics",
             "id": "salestact2",
-            "description": "Increase overall money multipler by x1, One-time purchase only!",
+            "description": "Increase maximum money multipler by 1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
                 "numOfPurchase": 0,
@@ -387,13 +388,13 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 500,
+            "cost": 450,
             "effect": function() { moneyMultiUp+=1;money-=this.cost; }
         },
         {
             "name": "Market Manipulation",
             "id": "salestact2",
-            "description": "Increase overall money multipler by x1, One-time purchase only!",
+            "description": "Increase maximum money multipler by 1, One-time purchase only!",
             "type": "Perm",
             "prereq": {
                 "numOfPurchase": 1,
@@ -403,7 +404,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 1250,
+            "cost": 1000,
             "effect": function() { moneyMultiUp+=1;money-=this.cost; }
         },
         {
@@ -422,7 +423,7 @@ let data = {
             },
             "level": 0,
             "cost": 500,
-            "effect": function() { workerEFF+=(5*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
+            "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         }
     ]
 }
