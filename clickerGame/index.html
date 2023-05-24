@@ -23,36 +23,28 @@
     <body>
 
         <section>
-            <h1>
-                <table>
-                    <tr>
-                        Current exchange rate for bread is: <span id="sellRate"></span>
-                    </tr>
-                    <tr>
-                        <td>
-                            Bread
-                        </td>
-                        <td>
-                            Money
-                        </td>
-                    </tr>
-                    <tr id="currencyNumbers">
-                        <td id="bread">0</td>
-                        <td id="money">0</td>
-                    </tr>
-                </table>
-            </h1>
-        </section>
-
-        <section>
-            <span id="breadAdded"></span>
-            <span id="moneyAdded"></span>
+                <div id="currency">
+                    Current exchange rate for bread is: <span id="sellRate"></span><br>
+                    Dough
+                    <div class="gain"><div id="dough">0</div><div id="doughAdded"></div></div>
+                    Bread
+                    <div class="gain"><div id="bread">0</div><div id="breadAdded"></div></div>
+                    Money
+                    <div class="gain"><div id="money">0</div><div id="moneyAdded"></div></div>
+                </div>
         </section>
 
         <section id="buttons">
+                <button id="doughMaker">Press to make dough!</button>
                 <button id="breadMaker">Press to make bread!</button>
                 <button id="moneyMaker">Press to sell bread!</button>
         </section>
 
+        <section id="upgrades">
+            Upgrades<br>
+            <div id="button-container">
+
+            </div>
+        </section>
     </body>
 </html>
