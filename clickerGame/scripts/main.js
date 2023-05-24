@@ -27,8 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
     function createButton(upgrade, container) {
         let button = document.createElement('button')
         button.setAttribute("data-unique-id", upgrade.id);
-        button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
+        button.textContent = 'UNLOCKED!';
         button.classList.add('button-container');
+        setTimeout(function() {
+            button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
+        }, 500);
     
         button.addEventListener('click', function() {
             if (money >= upgrade.cost) {
