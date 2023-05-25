@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         button.addEventListener('click', function() {
             if (money >= upgrade.cost) {
-                if (upgrade.type == "nonPerm") {
+                if (upgrade.type == "nonPerm" || "worker") {
                     upgrade.level += 1;
                     upgrade.effect();
                     getUpgrades();
@@ -43,11 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 else if (upgrade.type == "Perm") {
                     button.remove();
                     console.log("DIE:", button);
-                    upgrade.level += 1;
-                    upgrade.effect();
-                    getUpgrades();
-                }
-                else if (upgrade.type == "worker") {
                     upgrade.level += 1;
                     upgrade.effect();
                     getUpgrades();
