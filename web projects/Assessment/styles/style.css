@@ -1,0 +1,196 @@
+/**********************************************************************************
+* Style Sheet for the entire Astron website
+*
+* Author: Joseph Healy
+* Last Updated: 19/05/2023
+*
+*
+**********************************************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+header * {
+    display: inline;
+}
+
+nav {
+    display: flex;
+    justify-content: right;
+}
+    nav a {
+        margin-right: 2rem;
+        background-image: linear-gradient(25deg, 
+                                        #00d4ff 2%, 
+                                        #b219ba 15%, 
+                                        #811096 29%, 
+                                        #6116b3 40%, 
+                                        #090979 62%, 
+                                        #5605bc 86%, 
+                                        #00d4ff 100%);
+        background-size: 80rem;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 3rem;
+        text-decoration: none;
+        transition: background-position 0.5s;
+        background-position: -80px;
+    }
+        nav a:hover {
+            background-position: 100px;
+            transition: background-position 0.35s ease-out;
+        }
+
+        
+td {
+    border-width: 0.625rem;
+    border-color: #e0dde0;
+    background-color: #e0dde0;
+    border-style: solid;
+    border-radius: 0.25rem;
+    box-shadow: inset;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 2rem;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+    td img {
+        border-radius: 0.5rem;
+    }
+
+    td:hover {
+        transform: scale(1.1);
+    }
+
+
+.topicSubHeading {
+    font-weight: bold;
+    color: #5F5F7F;
+} 
+
+.imageCredits {
+    font-size: 0.75rem;
+}
+
+    .imageCredits a {
+        color: #5F5F7F;
+    }
+
+
+#astronIcon {
+    position: absolute;
+    left: calc(2%);
+    top: calc(2%);
+    background-image: linear-gradient(155deg, 
+                                    #00d4ff 2%, 
+                                    #b219ba 15%, 
+                                    #811096 29%, 
+                                    #6116b3 40%, 
+                                    #090979 62%, 
+                                    #5605bc 86%, 
+                                    #00d4ff 100%);
+    background-size: 80rem;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: background-position 1s;
+    background-position: -80px;
+}
+    #astronIcon:hover {
+        background-position: 0px;
+        transition: background-position 1s;
+    }
+
+
+#introText {
+    position: absolute;
+    left: calc(10%);
+    top: calc(20%);
+    color: #5F5F7F;
+    font-size: 4rem;
+}
+
+#colouredText {
+    position: absolute;
+    top: calc(35%);
+    left: calc(10%);
+    line-height: 1.2;
+    background-size: 3rem;
+    font-size: 15rem;
+}
+
+#mainText {
+    color: #5F5F7F;
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+#imageSection {
+    display: flex;
+    justify-content: center;
+}
+
+#learningTopicTable {
+    border-spacing: 10rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#contentSection {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5rem;
+    width: 60%;
+}
+    #contentSection .heading {
+        color: #6116b3;
+        margin-top: 5rem;
+        display: flex;
+        font-size: 3rem;
+        font-weight: bold;
+        justify-content: center;
+    }
+
+    #contentSection .source {
+        color: #5F5F7F;
+        font-size: 0.75rem;
+    }
+
+
+#backButton {
+    position: fixed;
+    color: #35353d;
+    font-size: 2rem;
+    margin-left: 5rem;
+    text-decoration: none;
+}
+    #backButton:hover {
+        text-decoration: underline;
+    }
+
+
+#backToTop {
+    margin-top: 3.5rem;
+    margin-bottom: 10rem;
+    font-size: 4rem;
+    text-align: center;
+    transition: 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+    #backToTop a {
+        text-decoration: none;
+        color: #35353d;
+    }
+
+    #backToTop:hover {
+        transform: scale(1.05);
+    }

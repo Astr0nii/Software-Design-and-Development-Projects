@@ -1,0 +1,69 @@
+h1 {
+    color:rgb(52, 200, 207);
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 15px;
+    background-color: rgb(25, 25, 25);
+    border-width: 3px; 
+    border-style: solid;
+    border-color: rgb(4, 109, 114);
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 20px;
+}
+
+h2 {
+    color:rgb(39, 126, 197);
+    font-size: 1.5em;
+    text-align: left;
+}
+
+footer {
+    color: rgb(65, 189, 206);
+    font-size: 1.5em;
+}
+
+body {
+    background-color: rgb(56, 56, 56);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(153, 223, 73);
+    line-height: 1;
+    text-align: center;
+}
+
+strong {
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    padding: 20px;
+    font-size: 40px;
+}
+
+nav li a {
+    color: rgb(100, 149, 237);
+    background-color: rgb(25, 25, 25);
+    border-width: 3px; 
+    border-style: solid;
+    border-color: rgb(45, 81, 112);
+    border-radius: 30px;
+    padding: 20px 25px;
+    text-decoration: none;
+    transition: all 0.25s ease-out;
+}
+
+li a:hover {
+    border-width: 3px; 
+    font-size: 42px;
+    border-style: solid;
+    border-color: rgb(45, 81, 160);
+    color: rgb(132, 172, 247);
+    background-color: rgb(25, 25, 25);
+}

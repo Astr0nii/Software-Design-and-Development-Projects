@@ -1,0 +1,272 @@
+/**********************************************************************************
+* Style Sheet for the entire JH website
+*
+* Author: Joseph Healy
+* Last Updated: 27/03/2023
+*
+*
+**********************************************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+body {
+    height: 125vh;
+    width: 100vw;
+    margin-top: 5rem;
+    padding: 1.9rem;
+    background-size: cover;
+    background-color: #0E0E13;
+    font-family: 'Urbanist', sans-serif;
+}
+
+h1 {
+    display: inline-block;
+    font-size: 4rem;
+    color: #cccccc;
+    font-weight: 400;
+    animation: fadeIn 1s linear 0.25s backwards;
+    align-items: center;
+    padding: 3.8rem;
+}
+
+    h1 .newText {
+        font-family: 'Unbounded', sans-serif;
+        color: #d4d4d4
+    }
+    
+    h1 .smallText {
+        font-family: 'Unbounded', sans-serif;
+        font-size: 1rem;
+    }
+
+    h1 img {
+        display: flex;
+        margin-left: auto;
+        justify-content: right;
+    }
+
+p {
+    opacity: 0;
+    animation: fadeIn 3s forwards 1.25s ease-out;
+    color: #afafaf;
+    font-size: 1.2rem;
+    padding: 1.3rem;
+}
+    .textTitleSection {
+        width: 22rem;
+        margin-left: auto;
+    }
+    
+    .textMainSection {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        padding-left: 3.8rem;
+        font-size: 5rem;
+        font-weight: lighter;
+        text-align: center;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    font-size: 0.5rem;
+}
+
+table {
+    position: relative;
+    animation: fadeIn 1.5s backwards 1s ease-out;
+    border-spacing: 3.125rem;
+    width: 90%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    td {
+        border-width: 0.625rem;
+        border-color: #26262c;
+        background-color: #26262c;
+        border-style: solid;
+        border-radius: 0.25rem;
+        box-shadow: inset;
+        transform-style: preserve-3d;
+        transform: perspective(62.5rem);
+    }
+        td .newText {
+            font-size: auto;
+            padding: 0.125rem;
+            margin: 0;
+            justify-content: center;
+        }
+
+        td .newTextTopic {
+            font-size: 1.5rem;
+            padding: 0.05rem;
+        }
+
+abbr {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #d4d4d4;
+}
+
+hr {
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    background-image: linear-gradient(#0e0e13 30%, #0e0e1300);
+    width: 200rem;
+    top: 0rem;
+    height: 20rem;
+    left: 0;
+    right: 0;
+    border: 0;
+}
+
+header {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 1.5rem;
+    height: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+nav {
+    display: flex;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 1.25rem;
+}
+
+header li .logo {
+    justify-content: left;
+    
+}
+
+header li a {
+    color: #c5c5c5;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+header li:not(.logo) a:hover {
+    color: #f0f8ff;
+}
+
+.active {
+    text-shadow: #00d3e2 0 0 0.625rem;
+}
+
+.hoverEffect {
+    font-size: 2rem;
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+    .hoverEffect::after {
+        content: '';
+        position: absolute;
+        width: 120%;
+        transform: scaleX(0);
+        height: 0.125rem;
+        bottom: 0;
+        left: -10%;
+        background-color: #0087ca;
+        transform-origin: center;
+        transition: transform 0.25s ease-out;
+    }
+
+    .hoverEffect:hover::after {
+        transform: scaleX(1);
+        transform-origin: center;
+    }
+
+
+.logo {
+    font-size: 6rem;
+    font-family: 'Nabla', sans-serif;
+    text-decoration: none;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.background {
+    padding: 1.3rem;
+    background-color: #16161c;
+    background-size: cover;
+}
+
+.colouredText {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 0.3rem;
+    transition: all 0.5s ease-out;
+}
+    .colouredText:hover {
+        text-shadow: 0 0 1.5rem;
+    }
+
+    #rC {
+        color: #e23500;
+    }
+
+    #bC {
+        color: #00d3e2;
+    }
+
+    #yC {
+        color: #e2a600;
+    }
+
+.cursor {
+    display: inline-block;
+    width: 0.25rem;
+    background-color: #cccccc;
+    margin-left: 0.1rem;
+    animation: blink 1s infinite;
+}
+    .cursor.typing {
+        animation: none;
+    }
+    .cursor.notTyping {
+        animation: fadeOut 0.25s forwards;
+    }
+
+
+.content {
+    margin-top: 30rem;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; margin-left: 0.1rem; width: 0.25rem; }
+    100% { opacity: 0; margin: 0; width: 0; }
+}
+
+@keyframes blink {
+    0% { background-color: #cccccc; }
+    49% { background-color: #cccccc; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100% { background-color: #cccccc; }
+}

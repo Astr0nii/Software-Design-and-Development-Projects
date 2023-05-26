@@ -1,0 +1,15 @@
+- All scripts are now in one 'main.js' script.
+
+- Learning page has been started.
+
+- A Random hexcode colour function has been implemented. It generates how ever many random colours you want and stores them in an array :)
+
+- Random quote has been removed as I felt it didn't quite fit what I was going for.
+
+- Fog effect to make all content below the header invisible.
+
+- Author blocks updated.
+
+- Useless old code removed from earlier ideas.
+
+- More words added to the random words list
