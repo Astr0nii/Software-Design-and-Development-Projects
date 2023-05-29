@@ -8,6 +8,12 @@ let bread = 0;
 let breadAmountAdded = 1;
 let breadSellAmount = 1;
 
+// Golde Bread vars
+let goldBreadUnlocked = false;
+let goldBreadChance = 0.0125;
+let goldBread = 0;
+let goldBreadAmountAdded = 1;
+
 // Money vars
 let money = 0;
 let moneyAmountAdded = 1;
@@ -80,14 +86,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let unlocked = true;
     
             if (upgrade.prereq.numOfPurchase == 0) {
-                console.log(upgrade);
-                console.log("No number of upgrades!");
-                
+                console.log("upgrade contains no prerequisites");              
             }
             else {
                 for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
-                    console.log("checking: ", upgrade);
-                    console.log(i);
                     let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase[i].toLowerCase());
                     if (prereqUpgrade.level < upgrade.prereq.level) {
                         unlocked = false;
@@ -139,6 +141,9 @@ document.addEventListener("DOMContentLoaded", function() {
     breadButton.addEventListener("click", function() {
         breadAdded.style.opacity = 1;
         doughAdded.style.opacity = 1;
+        if (Math.random() * 101 < goldBreadChance) {
+            goldBread += goldBreadAmountAdded;
+        }
         if (dough - doughCost >= 0) {
             dough -= doughCost
             bread += breadAmountAdded;
@@ -185,10 +190,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function gameLoop() {
-
-    
     updateVals();
     updateWorkers();
+    specialCurrency();
     setTimeout(() => {
         gameLoop();
     }, 1000);
@@ -197,6 +201,7 @@ function gameLoop() {
 function updateVals() {
     const doughText = document.getElementById("dough");
     const breadText = document.getElementById("bread");
+    const goldBreadText = document.getElementById("goldBread");
     const moneyText = document.getElementById("money");
     const sellRate = document.getElementById("sellRate");
     
@@ -204,6 +209,9 @@ function updateVals() {
     sellRate.innerHTML = moneyMulti;
     moneyText.innerHTML = '$' + money;
     breadText.innerHTML = bread;
+    if (goldBreadUnlocked == true) {
+        goldBreadText.innerHTML = goldBread;
+    }
 }
 
 function updateWorkers() {
@@ -270,6 +278,20 @@ function updateWorkers() {
 }
 
 
+function specialCurrency() {
+    const goldBreadContainer = document.getElementById("goldBread");
+    const goldBreadTitle = document.getElementById("goldBreadTitle");
+
+    if (goldBread >= 1 && goldBreadUnlocked == false) {
+        goldBreadContainer.setAttribute("class", "gain");
+        goldBreadContainer.textContent = "UNLOCKED NEW CURRENCY!";
+        setTimeout(function() {
+            goldBreadContainer.textContent = goldBread;
+            goldBreadUnlocked = true;
+        }, 1000);
+        goldBreadTitle.textContent = "Golden Bread";
+    }
+}
 
 
 let data = {
@@ -418,6 +440,22 @@ let data = {
             },
             "level": 0,
             "cost": 500,
+            "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
+        },
+        {
+            "name": "Golden Brea Chance",
+            "id": "goldbreadchance",
+            "description": "Increases the effectiveness of workers",
+            "type": "nonPerm",
+            "prereq": {
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Worker Efficiency"
+                },
+                "level": "1"
+            },
+            "level": 0,
+            "cost": 2000,
             "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         }
     ]
