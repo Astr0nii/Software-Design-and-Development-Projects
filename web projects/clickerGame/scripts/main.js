@@ -9,7 +9,8 @@ let breadAmountAdded = 1;
 let breadSellAmount = 1;
 
 // Golde Bread vars
-let goldBreadChance = 50;
+let goldBreadUnlocked = false;
+let goldBreadChance = 0.0125;
 let goldBread = 0;
 let goldBreadAmountAdded = 1;
 
@@ -85,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let unlocked = true;
     
             if (upgrade.prereq.numOfPurchase == 0) {
-                break;                
+                console.log("upgrade contains no prerequisites");              
             }
             else {
                 for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
@@ -140,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
     breadButton.addEventListener("click", function() {
         breadAdded.style.opacity = 1;
         doughAdded.style.opacity = 1;
-        if (Math.random() * (0, 100) < goldBreadChance) {
+        if (Math.random() * 101 < goldBreadChance) {
             goldBread += goldBreadAmountAdded;
         }
         if (dough - doughCost >= 0) {
@@ -189,10 +190,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function gameLoop() {
-
-    
     updateVals();
     updateWorkers();
+    specialCurrency();
     setTimeout(() => {
         gameLoop();
     }, 1000);
@@ -201,6 +201,7 @@ function gameLoop() {
 function updateVals() {
     const doughText = document.getElementById("dough");
     const breadText = document.getElementById("bread");
+    const goldBreadText = document.getElementById("goldBread");
     const moneyText = document.getElementById("money");
     const sellRate = document.getElementById("sellRate");
     
@@ -208,6 +209,9 @@ function updateVals() {
     sellRate.innerHTML = moneyMulti;
     moneyText.innerHTML = '$' + money;
     breadText.innerHTML = bread;
+    if (goldBreadUnlocked == true) {
+        goldBreadText.innerHTML = goldBread;
+    }
 }
 
 function updateWorkers() {
@@ -274,6 +278,20 @@ function updateWorkers() {
 }
 
 
+function specialCurrency() {
+    const goldBreadContainer = document.getElementById("goldBread");
+    const goldBreadTitle = document.getElementById("goldBreadTitle");
+
+    if (goldBread >= 1 && goldBreadUnlocked == false) {
+        goldBreadContainer.setAttribute("class", "gain");
+        goldBreadContainer.textContent = "UNLOCKED NEW CURRENCY!";
+        setTimeout(function() {
+            goldBreadContainer.textContent = goldBread;
+            goldBreadUnlocked = true;
+        }, 1000);
+        goldBreadTitle.textContent = "Golden Bread";
+    }
+}
 
 
 let data = {
