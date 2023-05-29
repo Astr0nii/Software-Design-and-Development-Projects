@@ -8,6 +8,11 @@ let bread = 0;
 let breadAmountAdded = 1;
 let breadSellAmount = 1;
 
+// Golde Bread vars
+let goldBreadChance = 50;
+let goldBread = 0;
+let goldBreadAmountAdded = 1;
+
 // Money vars
 let money = 0;
 let moneyAmountAdded = 1;
@@ -80,14 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let unlocked = true;
     
             if (upgrade.prereq.numOfPurchase == 0) {
-                console.log(upgrade);
-                console.log("No number of upgrades!");
-                
+                break;                
             }
             else {
                 for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
-                    console.log("checking: ", upgrade);
-                    console.log(i);
                     let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase[i].toLowerCase());
                     if (prereqUpgrade.level < upgrade.prereq.level) {
                         unlocked = false;
@@ -139,6 +140,9 @@ document.addEventListener("DOMContentLoaded", function() {
     breadButton.addEventListener("click", function() {
         breadAdded.style.opacity = 1;
         doughAdded.style.opacity = 1;
+        if (Math.random() * (0, 100) < goldBreadChance) {
+            goldBread += goldBreadAmountAdded;
+        }
         if (dough - doughCost >= 0) {
             dough -= doughCost
             bread += breadAmountAdded;
@@ -418,6 +422,22 @@ let data = {
             },
             "level": 0,
             "cost": 500,
+            "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
+        },
+        {
+            "name": "Golden Brea Chance",
+            "id": "goldbreadchance",
+            "description": "Increases the effectiveness of workers",
+            "type": "nonPerm",
+            "prereq": {
+                "numOfPurchase": 1,
+                "purchase": {
+                    0:  "Worker Efficiency"
+                },
+                "level": "1"
+            },
+            "level": 0,
+            "cost": 2000,
             "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         }
     ]
