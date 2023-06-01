@@ -26,97 +26,8 @@ let doughWorkers = 0;
 let breadWorkers = 0;
 let moneyWorkers = 0;
 
+
 document.addEventListener("DOMContentLoaded", function() {
-    const buttonContain = document.getElementById("button-container");
-    let upgrades = data.upgrades;
-
-    function createButton(upgrade, container) {
-        let button = document.createElement('button')
-        button.setAttribute("data-unique-id", upgrade.id);
-        button.textContent = 'UNLOCKED!';
-        button.classList.add('button-container');
-        setTimeout(function() {
-            button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
-        }, 500);
-    
-        button.addEventListener('click', function() {
-            if (money >= upgrade.cost) {
-                if (upgrade.type == "nonPerm" || "worker") {
-                    upgrade.level += 1;
-                    upgrade.effect();
-                    getUpgrades();
-                }
-                else if (upgrade.type == "Perm") {
-                    button.remove();
-                    console.log("DIE:", button);
-                    upgrade.level += 1;
-                    upgrade.effect();
-                    getUpgrades();
-                }
-                button.textContent = 'PURCHASED!';
-            }
-            else {
-                console.log("BROKE MF");
-            }
-        });
-    
-        button.addEventListener('mouseover', function() {
-            if (upgrade.type == 'worker') {
-                button.innerHTML = upgrade.name + '<br>' + upgrade.description + '<br><br>New Worker Count: ' + upgrade.level + '>' + (upgrade.level+1);
-            }
-            else {
-                button.innerHTML = upgrade.name + '<br>' + upgrade.description + '<br><br>New Level: ' + upgrade.level + '>' + (upgrade.level+1);
-            }
-        
-        });
-    
-        button.addEventListener('mouseout', function() {
-            button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
-        });
-    
-        button.style.padding = '1.25rem';
-        button.style.fontSize = '1rem';
-        button.style.width = '20rem';
-        button.style.textAlign = 'center';
-        container.appendChild(button);
-    }
-
-    function getUpgrades() {
-        for (let upgrade of upgrades) {
-            let unlocked = true;
-    
-            if (upgrade.prereq.numOfPurchase == 0) {
-                console.log("upgrade contains no prerequisites");              
-            }
-            else {
-                for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
-                    let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase[i].toLowerCase());
-                    if (prereqUpgrade.level < upgrade.prereq.level) {
-                        unlocked = false;
-                    }
-                }
-            }
-    
-    
-            let added = false;
-            for (let child of buttonContain.children) {
-                if (child.dataset.uniqueId == upgrade.id) {
-                    added = true;
-                    break;
-                }
-            }
-    
-    
-            if (unlocked && !added) {
-                if (upgrade.type == "Perm" && upgrade.level !== 1) {
-                    createButton(upgrade, buttonContain);
-                }
-                else if (upgrade.type !== "Perm") {
-                    createButton(upgrade, buttonContain);
-                }
-            }
-        }
-    }
     getUpgrades();
 
     const doughButton = document.getElementById("doughMaker");
@@ -127,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const moneyAdded = document.getElementById("moneyAdded");
     const saveButton = document.getElementById("save");
     const loadButton = document.getElementById("load");
+    const deleteButton = document.getElementById("delete");
 
     gameLoop();
     doughButton.addEventListener("click", function() {
@@ -195,7 +107,26 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     loadButton.addEventListener("click", function() {
         loadGame();
-        
+    });
+    deleteButton.addEventListener("click", function() {
+        deleteButton.textContent = "Are you sure?";
+        deleteButton.style.color = 'red';
+        var playerInput = prompt("Please enter the word 'confirm' to delete the save or 'abort' to cancel deleting the save.");
+        console.log(playerInput);
+        if (playerInput == "confirm") {
+            console.log("Deleting game!");
+            deleteButton.textContent = "DELETED!"
+            alert("Please refresh page to start a new save!");
+            deleteGame();
+        }
+        else if (playerInput == "abort") {
+            console.log("Aborting");
+            deleteButton.style.color = 'black';
+            deleteButton.textContent = "DELETE SAVE";
+        }
+        else {
+            playerInput = prompt("Please enter the word 'confirm' to delete the save or 'abort' to cancel deleting the save.");
+        }
     });
 });
 
@@ -206,6 +137,98 @@ function gameLoop() {
     setTimeout(() => {
         gameLoop();
     }, 1000);
+}
+
+function createButton(upgrade, container) {
+
+    let button = document.createElement('button')
+    button.setAttribute("data-unique-id", upgrade.id);
+    button.textContent = 'UNLOCKED!';
+    button.classList.add('button-container');
+    setTimeout(function() {
+        button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
+    }, 500);
+
+    button.addEventListener('click', function() {
+        if (money >= upgrade.cost) {
+            if (upgrade.type == "nonPerm" || "worker") {
+                upgrade.level += 1;
+                upgrade.effect();
+                getUpgrades();
+            }
+            else if (upgrade.type == "Perm") {
+                button.remove();
+                console.log("DIE:", button);
+                upgrade.level += 1;
+                upgrade.effect();
+                getUpgrades();
+            }
+            button.textContent = 'PURCHASED!';
+        }
+        else {
+            console.log("BROKE MF");
+        }
+    });
+
+    button.addEventListener('mouseover', function() {
+        if (upgrade.type == 'worker') {
+            button.innerHTML = upgrade.name + '<br>' + upgrade.description + '<br><br>New Worker Count: ' + upgrade.level + '>' + (upgrade.level+1);
+        }
+        else {
+            button.innerHTML = upgrade.name + '<br>' + upgrade.description + '<br><br>New Level: ' + upgrade.level + '>' + (upgrade.level+1);
+        }
+    
+    });
+
+    button.addEventListener('mouseout', function() {
+        button.textContent = upgrade.name + ' - Cost: ' + upgrade.cost + '. Level: ' + upgrade.level;
+    });
+
+    button.style.padding = '1.25rem';
+    button.style.fontSize = '1rem';
+    button.style.width = '20rem';
+    button.style.textAlign = 'center';
+    container.appendChild(button);
+}
+
+function getUpgrades() {
+    const buttonContain = document.getElementById("button-container");
+    let upgrades = data.upgrades;
+
+    for (let upgrade of upgrades) {
+        let unlocked = true;
+
+        if (upgrade.prereq.numOfPurchase == 0) {
+            console.log("upgrade contains no prerequisites");              
+        }
+        else {
+            for (let i=0;i<upgrade.prereq.numOfPurchase;i++) {
+                let prereqUpgrade = upgrades.find(u => u.name.toLowerCase() === upgrade.prereq.purchase[i].toLowerCase());
+                if (prereqUpgrade.level < upgrade.prereq.level) {
+                    unlocked = false;
+                }
+            }
+        }
+
+
+        let added = false;
+        for (let child of buttonContain.children) {
+            if (child.dataset.uniqueId == upgrade.id) {
+                added = true;
+                break;
+            }
+        }
+
+
+        if (unlocked && !added) {
+            if (upgrade.type == "Perm" && upgrade.level !== 1) {
+                createButton(upgrade, buttonContain);
+            }
+            else if (upgrade.type !== "Perm") {
+                createButton(upgrade, buttonContain);
+            }
+        }
+    }
 }
 
 function saveGame() {
@@ -258,6 +281,11 @@ function loadGame() {
         moneyAmountAdded = gameState.moneyAmountAdded;
         data.upgrades = gameState.upgrades
     }
+    getUpgrades();
+}
+
+function deleteGame() {
+    localStorage.removeItem('gameState');
 }
 
 function updateVals() {
