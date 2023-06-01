@@ -33,7 +33,7 @@ int randNum(int maxNum, char numDifficulty) {
             numOfNumsToGen = 2;
             maxNum = 1000;
             break;
-        case 'e':
+        case 'x':
             numOfNumsToGen = 4;
             maxNum = 10000;
             break;

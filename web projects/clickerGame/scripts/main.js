@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const doughAdded = document.getElementById("doughAdded");
     const breadAdded = document.getElementById("breadAdded");
     const moneyAdded = document.getElementById("moneyAdded");
+    const saveButton = document.getElementById("save");
+    const loadButton = document.getElementById("load");
 
     gameLoop();
     doughButton.addEventListener("click", function() {
@@ -187,6 +189,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
     });
+
+    saveButton.addEventListener("click", function() {
+        saveGame();
+    });
+    loadButton.addEventListener("click", function() {
+        loadGame();
+        
+    });
 });
 
 function gameLoop() {
@@ -196,6 +206,58 @@ function gameLoop() {
     setTimeout(() => {
         gameLoop();
     }, 1000);
+}
+
+function saveGame() {
+    console.log(data.upgrades);
+    const gameState = {
+        money: money,
+        bread: bread,
+        dough: dough,
+        goldBread: goldBread,
+        goldBreadAmountAdded: goldBreadAmountAdded,
+        goldBreadChance: goldBreadChance,
+        goldBreadUnlocked: goldBreadUnlocked,
+        workerEFF: workerEFF,
+        doughWorkers: doughWorkers,
+        breadWorkers: breadWorkers,
+        moneyWorkers: moneyWorkers,
+        doughAmountAdded: doughAmountAdded,
+        doughCost: doughCost,
+        breadAmountAdded: breadAmountAdded,
+        breadSellAmount: breadSellAmount,
+        moneyAmountAdded: moneyAmountAdded,
+        upgrades: data.upgrades,
+    };
+    localStorage.setItem('gameState', JSON.stringify(gameState));
+}
+
+function loadGame() {
+    const buttonContain = document.getElementById("button-container");
+    while (buttonContain.firstChild) {
+        buttonContain.removeChild(buttonContain.lastChild);
+    }
+    const savedState = localStorage.getItem('gameState');
+    if (savedState) {
+        const gameState = JSON.parse(savedState);
+        money = gameState.money;
+        bread = gameState.bread;
+        dough = gameState.dough;
+        goldBread = gameState.goldBread;
+        goldBreadAmountAdded = gameState.goldBreadAmountAdded;
+        goldBreadChance = gameState.goldBreadChance;
+        goldBreadUnlocked = gameState.goldBreadUnlocked;
+        workerEFF = gameState.workerEFF;
+        doughWorkers = gameState.doughWorkers;
+        breadWorkers = gameState.breadWorkers;
+        moneyWorkers = gameState.moneyWorkers;
+        doughAmountAdded = gameState.doughAmountAdded;
+        doughCost = gameState.doughCost;
+        breadAmountAdded = gameState.breadAmountAdded;
+        breadSellAmount = gameState.breadSellAmount;
+        moneyAmountAdded = gameState.moneyAmountAdded;
+        data.upgrades = gameState.upgrades
+    }
 }
 
 function updateVals() {
