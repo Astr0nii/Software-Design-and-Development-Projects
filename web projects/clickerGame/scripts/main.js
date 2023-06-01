@@ -96,10 +96,9 @@ document.addEventListener("DOMContentLoaded", function() {
             breadAdded.innerHTML = ' -' + breadSellAmount;
             moneyMulti = (Math.random() * (0.8, 1.25) + moneyMultiUp).toFixed(2);
         }
-        else {
+        else { 
             console.log("BROKE MF (in the bread department")
         }
-        
     });
 
     saveButton.addEventListener("click", function() {
@@ -323,7 +322,7 @@ function updateWorkers() {
         console.log("bread workers working");
         breadAdded.style.opacity = 1;
         doughAdded.style.opacity = 1;
-        if (dough - doughCost >= 0) {
+        if (dough - Math.ceil(breadWorkers*(doughCost*workerEFF)) >= 0) {
             dough -= Math.ceil(breadWorkers*(doughCost*workerEFF));
             bread += Math.ceil(breadWorkers*(breadAmountAdded*workerEFF));
             setTimeout(function() {
@@ -347,7 +346,7 @@ function updateWorkers() {
         console.log("money workers working");
         breadAdded.style.opacity = 1;
         moneyAdded.style.opacity = 1;
-        if (bread - breadSellAmount >= 0) {
+        if (bread - (moneyWorkers*(breadSellAmount*workerEFF)) >= 0) {
             const moneyToBe = Math.ceil(moneyWorkers*(moneyAmountAdded));
             money += moneyToBe;
             bread -= Math.ceil(moneyWorkers*(breadSellAmount*workerEFF));
@@ -399,7 +398,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 25,
+            "cost": 15,
             "effect": function() { doughAmountAdded+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -415,7 +414,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 40,
+            "cost": 20,
             "effect": function() { breadAmountAdded+=(1*this.level);doughCost+=(2*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -431,7 +430,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 65,
+            "cost": 40,
             "effect": function() { breadSellAmount+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -447,7 +446,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 200,
+            "cost": 100,
             "effect": function() { doughWorkers+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -463,7 +462,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 225,
+            "cost": 115,
             "effect": function() { breadWorkers+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -479,7 +478,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 250,
+            "cost": 125,
             "effect": function() { moneyWorkers+=(1*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
@@ -495,7 +494,7 @@ let data = {
                 "level": "none"
             },
             "level": 0,
-            "cost": 450,
+            "cost": 350,
             "effect": function() { moneyMultiUp+=1;money-=this.cost; }
         },
         {
@@ -511,7 +510,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 1000,
+            "cost": 750,
             "effect": function() { moneyMultiUp+=1;money-=this.cost; }
         },
         {
@@ -529,13 +528,13 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 500,
+            "cost": 375,
             "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         },
         {
-            "name": "Golden Brea Chance",
+            "name": "Golden Bread Chance",
             "id": "goldbreadchance",
-            "description": "Increases the effectiveness of workers",
+            "description": "Increases the chance to get golden bread",
             "type": "nonPerm",
             "prereq": {
                 "numOfPurchase": 1,
@@ -545,7 +544,7 @@ let data = {
                 "level": "1"
             },
             "level": 0,
-            "cost": 2000,
+            "cost": 1000,
             "effect": function() { workerEFF+=(0.05*this.level);money-=this.cost;this.cost=(this.cost*1.5).toFixed(2); }
         }
     ]
