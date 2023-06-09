@@ -1,7 +1,9 @@
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
+int main();
 
 char diffSettings() {
     char difficulty;
@@ -43,6 +45,7 @@ int randNum(char numDifficulty) {
     srand((unsigned) time(NULL));
     randNumber = 1 + rand() % maxNum;
     return(randNumber);
+    main();
 }
 
 void compareNumber(int randNumber, char numDifficulty) {
@@ -93,7 +96,6 @@ void compareNumber(int randNumber, char numDifficulty) {
         }
     } while(playerGuess != randNumber);
     cout << "Wow! You guessed my number correctly, congratulations! You managed to do it in " << playerGuesses << " guesses!" << endl;
-    main();
 }
 
 int main() {
@@ -109,4 +111,5 @@ int main() {
     compareNumber(randNumber, diff);
 
     system("pause>0");
+    return 0;
 }
