@@ -30,6 +30,12 @@ int main() {
     char choice;
     string name;
 
+    cout << ".-------------------------------.\n"
+			"|         Naming Program        |\n"
+			"|           Version 1           |\n"
+			"|        By Joseph Healy        |\n"
+			"'-------------------------------'" << endl;
+
     // Generic filler text that asks the user for a name and greets them
     cout << "Hi there! I believe we haven't met before?" << endl;
     thinkingTime(5);
