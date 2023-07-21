@@ -22,11 +22,14 @@ void getNum(int maxNum) {
         total += i;
     }
     cout << "The total of numbers added from 1 to " << maxNum << " is: " << total << endl;;
-    cout << "Would you like to do another number? 'y' for yes, 'n' for no";
+    cout << "Would you like to do another number? 'y' for yes, 'n' for no: ";
     cin >> choice;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignores the maximum amount of characters
     if (choice == 'y') {
-        main();
+        cout << "Welcome! Please enter a number that you'd like to see added up to\n" 
+             << "For example, 10 would be numbers 1-10 added which equals 55!" << endl;
+        cin >> maxNum;
+        getNum(maxNum);
     }
     else {
         cout << "goodbye!" << endl;
@@ -41,7 +44,8 @@ int main () {
 			"|           Version 1           |\n"
 			"|        By Joseph Healy        |\n"
 			"'-------------------------------'" << endl;
-    cout << "Welcome! Please enter a number that you'd like to see added up to: ";
+    cout << "Welcome! Please enter a number that you'd like to see added up to\n" 
+             << "For example, 10 would be numbers 1-10 added which equals 55!" << endl;
     cin >> maxNum;
     getNum(maxNum);
     
