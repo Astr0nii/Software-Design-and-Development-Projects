@@ -19,6 +19,7 @@
 #include <ShlObj.h>
 #include <windows.h>
 #include <filesystem> // Needed to convert convert a Windows path to c++ path
+#include "score.h" // Needed to use our functions accross files
 
 
 /* https://stackoverflow.com/questions/66338153/undefined-reference-to-folderid-c
@@ -64,7 +65,7 @@ void score (string name, int score) {
     // Read-only mode for our high scores
     ifstream highscoresR;
     highscoresR.open(GetPath());
-    //"C:\\Users\\jeh12\\AppData\\Local\\highscores.txt"
+    //"C:\\Users\\username\\AppData\\Local\\highscores.txt"
     // Vector to store our Score structs for sorting
     vector<Score> highScores;
     if (highscoresR.is_open()) {
@@ -85,8 +86,6 @@ void score (string name, int score) {
     highscoresW.close();
 
     displayScores(); // Only after sorting the scores should we display them!
-
-    system("pause>0");
 }
 
 filesystem::path GetPath() {
@@ -106,13 +105,13 @@ filesystem::path GetPath() {
     /* VERY IMPORTANT: I will include this in the notes when submitting,
     *  however I will put it here just incase.
     *  To use CoTaskMemFree to free the path from memory since we aren't
-    *  using it we need the library ole32, which needs to be linked
+    *  using it anymore we need the library ole32, which needs to be linked
     *  since I am not using visual studio to compile this and you probably
     *  aren't either.
     *  When compiling make sure to include:
     *  -lole32
     *  after everything else!!
-    *  ** ONLY WHEN USING G++ FOR WINDOWS!!!
+    *  ** ONLY WHEN USING G++ FOR WINDOWS!!! **
     */
     
     

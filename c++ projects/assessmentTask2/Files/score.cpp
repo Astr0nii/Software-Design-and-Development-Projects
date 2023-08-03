@@ -15,27 +15,14 @@
 #include <string>
 #include <vector> // Needed for our vector we use to store scores
 #include <algorithm> // Needed for sort()
-#include <conio.h> // Needed for getch()
-#include <ShlObj.h>
-#include <windows.h>
-#include <filesystem> // Needed to convert convert a Windows path to c++ path
 #include "score.h" // Needed to use our functions accross files
 
-
-/* https://stackoverflow.com/questions/66338153/undefined-reference-to-folderid-c
-*  Windows Jank, KnownFolders declares the GUID without it being predefined.
-*/
-#define INITGUID
-#define INITKNOWNFOLDERS
-
-#include <KnownFolders.h> // Needed to use folder ids in SHGetKnownFolderPath()
 
 using namespace std;
 
 // Predefining functions here for the sake of cleanliness!
 void displayScores();
 void score(string name, int score);
-filesystem::path GetPath();
 
 // Struct needed for storing a name and score
 struct Score {
@@ -55,17 +42,17 @@ bool compareScores(const Score& a, const Score& b) {
 *  Sorting strings - https://www.geeksforgeeks.org/sorting-strings-from-the-text-file/
 *  Ordering names on a scoreboard - https://stackoverflow.com/questions/27111971/c-ordering-the-names-of-a-scoreboard
 */ 
-void score (string name, int score) {
+void storeScore (string name, int score) {
 
     // Writing the score to our file
     ofstream highscoresW;
-    highscoresW.open(GetPath(), ios::app);
+    highscoresW.open("highscores.txt", ios::app);
     highscoresW << name << ' ' << score << endl;
 
     // Read-only mode for our high scores
     ifstream highscoresR;
-    highscoresR.open(GetPath());
-    //"C:\\Users\\jeh12\\AppData\\Local\\highscores.txt"
+    highscoresR.open("highscores.txt");
+
     // Vector to store our Score structs for sorting
     vector<Score> highScores;
     if (highscoresR.is_open()) {
@@ -76,47 +63,23 @@ void score (string name, int score) {
         highscoresR.close();
     }
 
-    // Sort function from the algorithm library to sort our structs based on number
-    sort(highScores.begin(), highScores.end(), compareScores);
-    highscoresW.close(); // We need to close this to get rid of the append parameter
-    highscoresW.open(GetPath()); // Opening without append so it overwrite the existing content
-    for (const auto& score : highScores) {
-        highscoresW << score.name << ' ' << score.score << endl;
-    }
-    highscoresW.close();
+    
 
     displayScores(); // Only after sorting the scores should we display them!
 }
 
-filesystem::path GetPath() {
-    PWSTR path_tmp = NULL;
-    HRESULT hr = SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, NULL, &path_tmp);
+// A function that sorts our score file in order of highest to lowest score!
+void sortScores(vector<Score> scores) {
+    // Write only file mode
+    ofstream scoresWrite;
 
-    filesystem::path pathVar;
-    if (SUCCEEDED(hr)) {
-        // file found!
-        pathVar = path_tmp;
-        pathVar += "\\highScores.txt";
+    // Sort function from the algorithm library to sort our structs based on number
+    sort(scores.begin(), scores.end(), compareScores);
+    scoresWrite.open("highscores.txt"); // Opening without append so it overwrite the existing content
+    for (const auto& score : scores) {
+        scoresWrite << score.name << ' ' << score.score << endl;
     }
-    else {
-        cerr << "Appdata folder not found! Please repair windows installation!" << endl;
-        getch();
-    }
-    /* VERY IMPORTANT: I will include this in the notes when submitting,
-    *  however I will put it here just incase.
-    *  To use CoTaskMemFree to free the path from memory since we aren't
-    *  using it anymore we need the library ole32, which needs to be linked
-    *  since I am not using visual studio to compile this and you probably
-    *  aren't either.
-    *  When compiling make sure to include:
-    *  -lole32
-    *  after everything else!!
-    *  ** ONLY WHEN USING G++ FOR WINDOWS!!! **
-    */
-    
-    
-    CoTaskMemFree(path_tmp);
-    return pathVar;
+    scoresWrite.close();
 }
 
 // Pretty self-explanitory. A function that displays the score in our file
@@ -124,7 +87,7 @@ void displayScores() {
 
     // Open our file using ifstream (output stream)
     ifstream highscoresR;
-    highscoresR.open(GetPath());
+    highscoresR.open("highscores.txt");
 
     cout << "Name: " << setw(4) << ' ' << "Score: " << endl;
     if (highscoresR.is_open()) {
