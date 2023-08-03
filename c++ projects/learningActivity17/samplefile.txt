@@ -1,0 +1,37 @@
+#################################### HELP FILE - English ####################################
+This translation may not be entirely correct and may contain some mistakes.
+This file is meant to answer some common questions that users may have about this program.
+
+1) How do I navigate the menu?
+	As you were briefed when entering your name you use numbers.
+	Take the example situation below:
+		1} Play
+		2} Help
+		3} Options
+		4} Exit
+	Say I want to exit the game, in this case I would type '4' and
+	press the enter/return key on the keyboard.
+	If I want to play I would type '1' and press the enter/return key 
+	on the keyboard.
+
+2) I've found a bug, how do I report this?
+	You can report all issues, bugs and improvements at my github page
+	for all of my SDD projects here:
+	https://github.com/Astr0nii/Software-Design-and-Development-Projects
+	
+	Make sure to navigate to the "issues" tab and create a new issue with
+	the bug!
+
+3) What is the goal of this game?
+	Your goal is to answer mutiplication and division problems presented to you.
+	This game also keeps track of scores and times, which are viewable in the
+	"High scores" section of the menu. Use this high score page to challenge
+	your friends on your computer to see who has the sharpest mind!
+
+4) What do different difficulty levels do?
+	There are 7 levels, each level slightly increases the complexity of the problems,
+	A level 1 problem may look like this:
+	2 x 3 = ?
+	Whilst a level 7 problem may look like this:
+	837 x 34 = ?
+#############################################################################################

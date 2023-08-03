@@ -1,8 +1,8 @@
 /**********************************************************************************
-* Program name here - Description of said file
+* Encryption Program - Takes an input and outputs an encrypted/decrypted version
 *
 * Author: Joseph Healy
-* Last Updated: dd/mm/yyyy
+* Last Updated: 28/7/2023
 *
 *
 **********************************************************************************/
