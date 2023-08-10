@@ -55,6 +55,7 @@ void storeScore (string name, int score) {
 
     // Vector to store our Score structs for sorting
     vector<Score> highScores;
+    sortScores(highScores);
     if (highscoresR.is_open()) {
         // Read our file and add the name and score to a struct, which is then added into the vector
         while (highscoresR >> name >> score) {
@@ -68,7 +69,7 @@ void storeScore (string name, int score) {
     displayScores(); // Only after sorting the scores should we display them!
 }
 
-// A function that sorts our score file in order of highest to lowest score!
+// A function that sorts our score file in order of highest to lowest
 void sortScores(vector<Score> scores) {
     // Write only file mode
     ofstream scoresWrite;
