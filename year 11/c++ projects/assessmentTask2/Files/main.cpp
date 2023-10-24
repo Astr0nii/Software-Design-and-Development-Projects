@@ -204,15 +204,6 @@ void displayMenuOptions() {
     printButton('2', "Change amount of questions");
     printButton('3', "View matrix of possible problems and answers");
     printButton('4', "Go back to menu");
-    switch (getMenuValue()) {
-        case 4:
-            displayMenuMain();
-            break;
-        default:
-            cout << "That isn't a valid menu option!";
-            Sleep(1000);
-            displayMenuScores();
-    }
 }
 
 void intro() {
