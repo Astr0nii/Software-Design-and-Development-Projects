@@ -7,110 +7,289 @@
 *
 **********************************************************************************'''
 
+'''
+This program requires a indev version of the arcade library
+see: https://api.arcade.academy/en/development/get_started/install/source.html
+for installation instructions.
+
+Useful resources for teaching me how to do this:
+Menu stuff - https://api.arcade.academy/en/development/tutorials/menu/index.html
+'''
+
+
 import arcade
 import arcade.gui # needed for UI elements!
+import pathlib
+
+# Getting our current folder path
+currPath = str(pathlib.Path(__file__).parent)
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Maths Number Game by Joseph Healy"
+'''
+0 is potato
+1 is very low
+2 is low
+3 is medium
+4 is high
+5 is very high
+'''
+TEXTURE_QUALITY = 4
 
-class quitView(arcade.View):
+
+
+class mainGame(arcade.View):
     '''
-    Quit view class
+    Main game class
     '''
     def __init__(self):
+        super().__init__()
+
+        # Required for all of the code that uses UI elements
         self.uiManager = arcade.gui.UIManager()
         self.uiManager.enable()
-        
-        self.verticalUIContainer = arcade.gui.UIBoxLayout(space_between=20)
 
-        confirmButton = arcade.gui.UIFlatButton(text="Quit", width=200)
-        confirmButton.on_click = self.on_confirmButtonClick
-        self.verticalUIContainer.add(confirmButton)
+        switch_menu_button = arcade.gui.UIFlatButton(text="Pause", width=150)
+        @switch_menu_button.event("on_click")
+        def on_click_switch_button(event):
+            main_game = menuView(self)
+            self.window.show_view(main_game)
 
-        self.uiManager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x",
-                anchor_y="center_y",
-                child=self.verticalUIContainer
-            )
+        self.anchor = self.uiManager.add(arcade.gui.UIAnchorLayout())
+
+        self.anchor.add(
+            anchor_x="center_x",
+            anchor_y="center_y",
+            child=switch_menu_button,
         )
 
-class mainMenu(arcade.View):
+    # called when our view is hidden, we should disable our uiManager
+    def on_hide_view(self):
+        self.uiManager.disable()
+
+    # Set the background colour and enable our uiManager for drawing 
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.DARK_BLUE_GRAY)
+
+        self.uiManager.enable()
+
+    # Called whenever we're rendering on the screen
+    def on_draw(self):
+        # Clear the screen
+        self.clear()
+
+        # Draw the uiManager (our handler for UI elements)
+        self.uiManager.draw()
+
+
+class menuView(arcade.View):
     '''
     Main menu view class
     '''
-    def __init__(self):
+    def __init__(self, main_view):
+        super().__init__()
+
         # Required for all of the code that uses UI elements
         self.uiManager = arcade.gui.UIManager()
         self.uiManager.enable()
         
-        self.verticalUIContainer = arcade.gui.UIBoxLayout(space_between=20)
+        # Adding our buttons to the scene
+        resume_button = arcade.gui.UIFlatButton(text="Resume", width=150)
+        new_game_button = arcade.gui.UIFlatButton(text="New Game", width=150)
+        help_button = arcade.gui.UIFlatButton(text="Help", width=150)
+        options_button = arcade.gui.UIFlatButton(text="Options", width=150)
+        arcade_pygame_button = arcade.gui.UIFlatButton(text="Arcade > Pygame", width=150)
+        highscores_button = arcade.gui.UIFlatButton(text="High Scores", width=150)
+        exit_button = arcade.gui.UIFlatButton(text="Exit", width=310)
 
-       
-        playButton = arcade.gui.UIFlatButton(text="Play", width=200)
-        playButton.on_click = self.on_playButtonClick
-        self.verticalUIContainer.add(playButton)
+        # Initialising a grid, this allows us to arrange "widgets" in specific formations
+        self.grid = arcade.gui.UIGridLayout(column_count=2, row_count=4, horizontal_spacing=10, vertical_spacing=20)
 
-        optionsButton = arcade.gui.UIFlatButton(text="Options", width=200)
-        optionsButton.on_click = self.on_optionsButtonClick
-        self.verticalUIContainer.add(optionsButton)
+        # Adding our buttons to the grid layout
+        self.grid.add(resume_button, col_num=0, row_num=0)
+        self.grid.add(new_game_button, col_num=1, row_num=0)
+        self.grid.add(help_button, col_num=0, row_num=1)
+        self.grid.add(options_button, col_num=1, row_num=1)
+        self.grid.add(arcade_pygame_button, col_num=0, row_num=2)
+        self.grid.add(highscores_button, col_num=1, row_num=2)
+        # col_span, HTML reference!
+        self.grid.add(exit_button, col_num=0, row_num=3, col_span=2)
 
-        helpButton = arcade.gui.UIFlatButton(text="Help", width=200)
-        helpButton.on_click = self.on_helpButtonClick
-        self.verticalUIContainer.add(helpButton)
+        self.anchor = self.uiManager.add(arcade.gui.UIAnchorLayout())
 
-        quitButton = arcade.gui.UIFlatButton(text="Quit", width=200)
-        quitButton.on_click = self.on_quitButtonClick
-        self.verticalUIContainer.add(quitButton)
-
-        self.uiManager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x",
-                anchor_y="center_y",
-                child=self.verticalUIContainer
-            )
+        self.anchor.add(
+            anchor_x="center_x",
+            anchor_y="center_y",
+            child=self.grid,
         )
 
-    # These functions will be called everytime the user 
-    # presses the start button 
-    def on_playButtonClick(self, event): 
-        print("Play Button is clicked")
-    
-    def on_optionsButtonClick(self, event): 
-        print("Options Button is clicked") 
+        self.main_view = main_view
 
-    def on_helpButtonClick(self, event): 
-        print("Help Button is clicked") 
+        @resume_button.event("on_click")
+        def on_click_resume_button(event):
+            self.window.show_view(self.main_view)
 
-    def on_quitButtonClick(self, event): 
-        arcade.exit()
+        @new_game_button.event("on_click")
+        def on_click_new_game_button(event):
+            main_view = mainGame()
+            self.window.show_view(main_view)
+
+        @exit_button.event("on_click")
+        def on_click_exit_button(event):
+            arcade.exit()
+
+        @options_button.event("on_click")
+        def on_click_options_button(event):
+            options_menu = subMenu(400, 300)
+            options_menu.createText("Options Menu", 30, 20)
+            options_menu.createToggle("Enable Sound Effects", 5)
+            options_menu.createDropdown(["Potato", "Very Low", "Low", "Medium", "High", "Very High"], "Texture Quality", 5)
+            options_menu.addBackButton()
+            self.uiManager.add(
+                options_menu,
+                # Render this above everything else!
+                layer=1
+            )
+
+        @highscores_button.event("on_click")
+        def on_click_highscores_button(event):
+            highscores_menu = subMenu(
+                400, 
+                300,
+                )
+            self.uiManager.add(
+                highscores_menu,
+                # Render this above everything else!
+                layer=1
+            )
+
+    # Run when we swap to this view
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.DARK_BLUE_GRAY)
 
     # This HAS to be named "on_draw()", I want it to be onDraw tho...
     # Function to draw on the screen!
     def on_draw(self):
+        # Drawing this view
+        self.clear()
         arcade.start_render()
         self.uiManager.draw()
 
 
 
-class numberGame(arcade.Window):
+class subMenu(arcade.gui.UIMouseFilterMixin, arcade.gui.UIAnchorLayout):
     '''
-    Main Application class.
+    Class for creating pop-up windows!
     '''
-    def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, resizable=True)
 
-        arcade.set_background_color(arcade.color.ALICE_BLUE) 
+    widget_layout = arcade.gui.UIBoxLayout(align="center")
 
-        start_view = mainMenu()
-        self.show_view(start_view)
-        start_view.setup()
+    def __init__(self, WINDOW_HEIGHT: int, WINDOW_WIDTH: int):
+        super().__init__(size_hint=(1,1))
+
+        # Unlike the tutorial we want scalable windows!
+        self.WINDOW_HEIGHT = WINDOW_HEIGHT
+        self.WINDOW_WIDTH = WINDOW_WIDTH
+
+        # Setup an arcade frame which will be our pop-up menu
+        frame = self.add(arcade.gui.UIAnchorLayout(width=WINDOW_WIDTH, height=WINDOW_HEIGHT, size_hint=None))
+        frame.with_padding(all=20)
+
+        # Add a background to the frame
+        frame.with_background(texture=arcade.gui.NinePatchTexture(
+            left=7,
+            right=7,
+            bottom=7,
+            top=7,
+            texture=arcade.load_texture(
+                currPath + "/resources/dark_blue_gray_panel.png"
+            )
+        ))
+
+        self.widget_layout = arcade.gui.UIBoxLayout(align="center")
+
+        
+        frame.add(child=self.widget_layout, anchor_x="center_x", anchor_y="top")
+
+
+    def addBackButton(self):
+        # Make sure our back button scales with window size :)
+        back_button = arcade.gui.UIFlatButton(text="Go Back", width=self.WINDOW_WIDTH/2)
+        back_button_space = arcade.gui.UISpace(height=20, color=arcade.color.DARK_BLUE_GRAY)
+        print(self.WINDOW_WIDTH)
+        back_button.on_click = self.on_click_back_button
+        self.widget_layout.add(back_button_space)
+        self.widget_layout.add(back_button)
+
+    def createText(self, title: str, spacing: int, font_size: int):
+        title_label = arcade.gui.UILabel(text=title, align="center", font_size=font_size, multiline=False)
+        title_label_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY)
+        self.widget_layout.add(title_label)
+        self.widget_layout.add(title_label_space)
+        
+    def createInputBox(self, default_text: str, spacing: int):
+        input_text_widget = arcade.gui.UIInputText(text=default_text, width=self.WINDOW_WIDTH/2).with_border()
+        input_text_widget_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY)
+        self.widget_layout.add(input_text_widget)
+        self.widget_layout.add(input_text_widget_space)
+
+    def createToggle(self, toggle_text: str, spacing: int):
+        # Load different textures based on texture quality setting!
+        if TEXTURE_QUALITY < 3:
+            on_texture = arcade.load_texture(currPath + "/resources/circle_switch_on.png")
+        elif TEXTURE_QUALITY < 5:
+            on_texture = arcade.load_texture(currPath + "/resources/circle_switch_on_hq.png")
+        else:
+            on_texture = arcade.load_texture(currPath + "/resources/circle_switch_on_vhq.png")
+
+        off_texture = arcade.load_texture(currPath + "/resources/circle_switch_off.png")
+
+        toggle_label = arcade.gui.UILabel(text=toggle_text)
+        toggle = arcade.gui.UITextureToggle(
+            on_texture=on_texture,
+            off_texture=off_texture,
+            width=20,
+            height=20,
+        )
+
+        toggle_group = arcade.gui.UIBoxLayout(vertical=False, space_between=5)
+        toggle_group.add(toggle)
+        toggle_group.add(toggle_label)
+
+        toggle_group_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY)
+
+        self.widget_layout.add(toggle_group)
+        self.widget_layout.add(toggle_group_space)
+
+    def createDropdown(self, dropdown_options: list[str], dropdown_text: str, spacing: int):
+        self.createText(dropdown_text, 5, 15)
+        dropdown = arcade.gui.UIDropdown(default=dropdown_options[0], options=dropdown_options, height=20, width=self.WINDOW_WIDTH/2)
+        self.widget_layout.add(dropdown)
+    
+    def createSlider(self, slider_text: str, spacing: int):
+        slider_label = arcade.gui.UILabel(text=slider_text)
+        pressed_style = arcade.gui.UISlider.UIStyle(filled_bar=arcade.color.GREEN, unfilled_bar=arcade.color.RED)
+        default_style = arcade.gui.UISlider.UIStyle()
+        style_dict = {"press": pressed_style, "normal": default_style, "hover": default_style, "disabled": default_style}
+        slider = arcade.gui.UISlider(value=50, width=self.WINDOW_WIDTH/2, style=style_dict)
+        self.widget_layout.add(slider_label)
+        self.widget_layout.add(slider)
+
+
+# Removes the button from our widget layout
+        # The manager will respond to events normally (like it previously did).
+    def on_click_back_button(self, event):
+        if self.parent is not None:
+            self.parent.remove(self)
 
 
 
 def main():
-    numberGame()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, resizable=True)
+    main_view = mainGame()
+    window.show_view(main_view)
+
     arcade.run()
 
 if __name__ == "__main__":
