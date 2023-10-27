@@ -1,32 +1,47 @@
 '''**********************************************************************************
-* Maths game program
+* Modular menu system program
 *
 * Author: Joseph Healy
-* Last Updated: 17/10/2023
+* Last Updated: 28/10/2023
 *
 *
 **********************************************************************************'''
 
 '''
-This program requires a indev version of the arcade library
+This program requires a development build of the arcade library for python
 see: https://api.arcade.academy/en/development/get_started/install/source.html
 for installation instructions.
+
+Take this Mr Legge:
+https://api.arcade.academy/en/development/programming_guide/pygame_comparison.html
+
+This development build is much, much faster than pygame now! 
+
+BTW, the link in their installation guide is a lie! That version breaks this code.
+
+Install it directly from the github source version:
+https://github.com/pythonarcade/arcade/releases/tag/3.0.0-dev.26
+
+Ironically, because we are using a dev build, the default textures that come with
+arcade aren't all available, therefore we need to make some of our own temporary
+textures.
 
 Useful resources for teaching me how to do this:
 Menu stuff - https://api.arcade.academy/en/development/tutorials/menu/index.html
 '''
 
+# TODO: Make the menu save states!
 
 import arcade
 import arcade.gui # needed for UI elements!
-import pathlib
+import pathlib # Needed for accessing our game assets!
 
 # Getting our current folder path
 currPath = str(pathlib.Path(__file__).parent)
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 720
-SCREEN_TITLE = "Maths Number Game by Joseph Healy"
+SCREEN_TITLE = "Your game title here"
 '''
 0 is potato
 1 is very low
@@ -35,7 +50,7 @@ SCREEN_TITLE = "Maths Number Game by Joseph Healy"
 4 is high
 5 is very high
 '''
-TEXTURE_QUALITY = 4
+TEXTURE_QUALITY = 4 # This currently cannot be set via in-app settings
 
 
 
@@ -116,8 +131,10 @@ class menuView(arcade.View):
         # col_span, HTML reference!
         self.grid.add(exit_button, col_num=0, row_num=3, col_span=2)
 
+        # create an anchor that we use position our menu elements, in this case the exact center
         self.anchor = self.uiManager.add(arcade.gui.UIAnchorLayout())
 
+        # add our menu elements to the anchor
         self.anchor.add(
             anchor_x="center_x",
             anchor_y="center_y",
@@ -126,6 +143,7 @@ class menuView(arcade.View):
 
         self.main_view = main_view
 
+        # Create an event listener for the button, fire a function, profit?
         @resume_button.event("on_click")
         def on_click_resume_button(event):
             self.window.show_view(self.main_view)
@@ -141,11 +159,19 @@ class menuView(arcade.View):
 
         @options_button.event("on_click")
         def on_click_options_button(event):
+            '''
+            Example use of the pop-up menu system.
+            You first need to initialise the menu seen in the first line.
+            After that you will have access to a plethora of options to add your
+            own menu elements to this pop-up menu. 
+            '''
             options_menu = subMenu(400, 300)
             options_menu.createText("Options Menu", 30, 20)
             options_menu.createToggle("Enable Sound Effects", 5)
             options_menu.createDropdown(["Potato", "Very Low", "Low", "Medium", "High", "Very High"], "Texture Quality", 5)
             options_menu.addBackButton()
+
+            # Add everything to our uiManager
             self.uiManager.add(
                 options_menu,
                 # Render this above everything else!
@@ -154,10 +180,7 @@ class menuView(arcade.View):
 
         @highscores_button.event("on_click")
         def on_click_highscores_button(event):
-            highscores_menu = subMenu(
-                400, 
-                300,
-                )
+            highscores_menu = subMenu(400, 300)
             self.uiManager.add(
                 highscores_menu,
                 # Render this above everything else!
@@ -183,6 +206,7 @@ class subMenu(arcade.gui.UIMouseFilterMixin, arcade.gui.UIAnchorLayout):
     Class for creating pop-up windows!
     '''
 
+    # layout our menu elements in a central position!
     widget_layout = arcade.gui.UIBoxLayout(align="center")
 
     def __init__(self, WINDOW_HEIGHT: int, WINDOW_WIDTH: int):
@@ -212,25 +236,29 @@ class subMenu(arcade.gui.UIMouseFilterMixin, arcade.gui.UIAnchorLayout):
         
         frame.add(child=self.widget_layout, anchor_x="center_x", anchor_y="top")
 
-
+    
     def addBackButton(self):
         # Make sure our back button scales with window size :)
         back_button = arcade.gui.UIFlatButton(text="Go Back", width=self.WINDOW_WIDTH/2)
-        back_button_space = arcade.gui.UISpace(height=20, color=arcade.color.DARK_BLUE_GRAY)
-        print(self.WINDOW_WIDTH)
+        back_button_space = arcade.gui.UISpace(height=20, color=arcade.color.DARK_BLUE_GRAY) # Customizable white-space
+        
+        # Honestly I have no idea why, but we need to handle on_click detection this way to not throw goofiness in the console
         back_button.on_click = self.on_click_back_button
+
         self.widget_layout.add(back_button_space)
         self.widget_layout.add(back_button)
 
     def createText(self, title: str, spacing: int, font_size: int):
         title_label = arcade.gui.UILabel(text=title, align="center", font_size=font_size, multiline=False)
-        title_label_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY)
+        title_label_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY) # Customizable white-space
+
         self.widget_layout.add(title_label)
         self.widget_layout.add(title_label_space)
         
     def createInputBox(self, default_text: str, spacing: int):
         input_text_widget = arcade.gui.UIInputText(text=default_text, width=self.WINDOW_WIDTH/2).with_border()
-        input_text_widget_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY)
+        input_text_widget_space = arcade.gui.UISpace(height=spacing, color=arcade.color.DARK_BLUE_GRAY) # Customizable white-space
+
         self.widget_layout.add(input_text_widget)
         self.widget_layout.add(input_text_widget_space)
 
@@ -263,7 +291,7 @@ class subMenu(arcade.gui.UIMouseFilterMixin, arcade.gui.UIAnchorLayout):
         self.widget_layout.add(toggle_group_space)
 
     def createDropdown(self, dropdown_options: list[str], dropdown_text: str, spacing: int):
-        self.createText(dropdown_text, 5, 15)
+        self.createText(dropdown_text, 5, 15) # Create a title for our dropdown box, arcade doesn't support this by default????
         dropdown = arcade.gui.UIDropdown(default=dropdown_options[0], options=dropdown_options, height=20, width=self.WINDOW_WIDTH/2)
         self.widget_layout.add(dropdown)
     
@@ -277,8 +305,8 @@ class subMenu(arcade.gui.UIMouseFilterMixin, arcade.gui.UIAnchorLayout):
         self.widget_layout.add(slider)
 
 
-# Removes the button from our widget layout
-        # The manager will respond to events normally (like it previously did).
+    # Removes the button from our widget layout
+    # The manager will respond to events normally (like it previously did).
     def on_click_back_button(self, event):
         if self.parent is not None:
             self.parent.remove(self)
